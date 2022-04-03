@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->unsignedBigInteger('rank_id');
+            $table->unsignedBigInteger('rank_id')->nullable();
             $table->double('credit_value', 8, 4);
-            $table->unsignedBigInteger('kpi_group_id');
+            $table->unsignedBigInteger('kpi_group_id')->nullable();
             $table->boolean('has_file');
             $table->timestamps();
         });
