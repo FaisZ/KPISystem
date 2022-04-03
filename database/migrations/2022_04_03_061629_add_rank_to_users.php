@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
           $table->index('rank_id');
           $table->foreign('rank_id')->references('id')->on('rank')->onDelete('cascade');
+          $table->index('boss_id');
+          $table->foreign('boss_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,8 +29,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-          $table->dropForeign('rank_id');
-          $table->dropIndex('rank_id');
+          $table->dropForeign('users_rank_id_foreign');
+          $table->dropIndex('users_rank_id_index');
+          $table->dropForeign('users_boss_id_foreign');
+          $table->dropIndex('users_boss_id_index');
         });
     }
 };
