@@ -30,6 +30,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/pegawai', function () {
   return Inertia::render('PegawaiDashboard');
-})->middleware(['auth', 'verified'])->name('pegawai_dashboard');
+})->middleware(['auth', 'verified'])->name('pegawai');
 
+Route::get('/e', function () {
+  return Inertia::render('Experiments');
+})->middleware(['auth', 'verified'])->name('e');
+
+Route::view('/w', 'welcome')->middleware(['auth', 'verified']);
 require __DIR__.'/auth.php';
