@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PegawaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/pegawai', [PegawaiController::class, 'index']);
+Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -28,13 +32,9 @@ Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/pegawai', function () {
-  return Inertia::render('PegawaiDashboard');
-})->middleware(['auth', 'verified'])->name('pegawai');
 
 Route::get('/e', function () {
   return Inertia::render('Experiments');
 })->middleware(['auth', 'verified'])->name('e');
 
-Route::view('/w', 'pegawai/pegawai_dashboard')->middleware(['auth', 'verified']);
 require __DIR__.'/auth.php';
