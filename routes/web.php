@@ -25,7 +25,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+  return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/pegawai', function () {
+  return Inertia::render('PegawaiDashboard');
+})->middleware(['auth', 'verified'])->name('pegawai_dashboard');
 
 require __DIR__.'/auth.php';
