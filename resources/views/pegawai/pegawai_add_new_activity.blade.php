@@ -31,7 +31,7 @@
                 <x-form-checkbox name="subscribe_to_newsletter" label="Subscribe to newsletter" />
                 <x-form-checkbox name="agree_terms" label="Agree with terms" />
             </x-form-group>
-    
+            <btn btn-default>Hii</btn>
             <x-form-submit />
         </x-form>
       </div>
