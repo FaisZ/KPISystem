@@ -35,4 +35,9 @@ export default function Input({
             />
         </div>
     );
+    function handleChange(e){
+        console.log(e);
+    }
+    
 }
+

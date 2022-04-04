@@ -3,7 +3,11 @@ import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import HelloReact from '@/Components/HelloReact';
+import ShoppingList from '@/Components/ShoppingList';
+import TicTacToe from '@/Components/TicTacToe';
+import TicTacToeChild from '@/Components/TicTacToeChild';
+import Input from '@/Components/Input';
+import Button from '@/Components/Button';
 
 export default function Experiments(props) {
     return (
@@ -22,7 +26,9 @@ export default function Experiments(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">You're a budak pemerintah now!</div>
-                        <HelloReact></HelloReact>
+                        <Input />
+                        <Button children='Setuju' />
+                        {/* <ShoppingList name="Blast"/> */}
                     </div>
                 </div>
             </div>
