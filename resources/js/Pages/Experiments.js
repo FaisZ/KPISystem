@@ -10,29 +10,38 @@ import Input from '@/Components/Input';
 import Button from '@/Components/Button';
 
 export default function Experiments(props) {
+  const token = document.head.querySelector('meta[name="csrf-token"]').content;
     return (
       <Authenticated
       auth={props.auth}
       errors={props.errors}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Budak</h2>}
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Master Data Aktivitas</h2>}
   >
-    <Container maxWidth="sm">
-      <Typography component="div" style={{ 
-        backgroundColor: 'Orange', height: '10vh' 
-      }}>
+    <Container maxWidth="lg">
             <Head title="Experiments" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">You're a budak pemerintah now!</div>
-                        <Input />
-                        <Button children='Setuju' />
+                    <form method="POST" action="/e/addPegawai">
+                      <input type="hidden" name="_token" value={token} />
+                      {/* <input type="hidden" name="_token" value="{{ csrf_token() }}" /> */}
+                        <div className="p-6 bg-white border-b border-gray-200">
+                          Username
+                          <Input name="name"/>
+                        </div>
+                        <div className="p-6 bg-white border-b border-gray-200">
+                          Email
+                          <Input name="email"/>
+                        </div>
+                        <div className="p-6 bg-white border-b border-gray-200">
+                          Password
+                          <Input name="password"/>
+                        </div>
+                        <Button children='Tambahkan' />
                         {/* <ShoppingList name="Blast"/> */}
-                    </div>
+                    </form>
                 </div>
             </div>
-      </Typography>
     </Container>
   </Authenticated>
     );

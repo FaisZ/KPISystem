@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth; 
+use Illuminate\Http\Request;
+use Illuminate\Http\Redirector;
+
 class PegawaiController extends Controller
 {
     /**
@@ -18,7 +21,7 @@ class PegawaiController extends Controller
       return view('pegawai.pegawai_dashboard', [
         'user' => Auth::user()
       ]);
-  }
+    }
 
     public function show($id)
     {
@@ -34,4 +37,15 @@ class PegawaiController extends Controller
         ]);
     }
 
-  }
+    public function addPegawai(Request $request)
+    {
+      $save = new User;
+      $save->name = $request->name;
+      $save->email = $request->email;
+      $save->password = $request->password;
+
+      $save->save();
+      return redirect()->back()->with('success', 'User added');   
+      
+    }
+}

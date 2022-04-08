@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PegawaiController;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,7 @@ use App\Http\Controllers\PegawaiController;
 
 Route::get('/pegawai', [PegawaiController::class, 'index']);
 Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
+Route::post('e/addPegawai', [PegawaiController::class, 'addPegawai']);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
