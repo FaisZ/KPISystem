@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React from 'react';
 import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
@@ -47,6 +48,11 @@ export default function Experiments(props) {
     );
 }
   
+
+if (document.getElementById('experiments')) {
+  ReactDOM.render(<Experiments />, document.getElementById('experiments'));
+}
+
 // const App = () => {
 //   return (
 //     <Container maxWidth="sm">
