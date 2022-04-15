@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth; 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Http\Redirector;
 
@@ -45,7 +46,8 @@ class PegawaiController extends Controller
       $save->password = $request->password;
 
       $save->save();
-      return redirect()->back()->with('success', 'User added');   
+      return Inertia::render('Experiments', ['status' => 'success']);
+      //return redirect()->back()->with('status', 'User added');   
       
     }
 }

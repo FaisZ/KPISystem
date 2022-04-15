@@ -27,7 +27,7 @@ export default function Experiments(props) {
                       <input type="hidden" name="_token" value={token} />
                       {/* <input type="hidden" name="_token" value="{{ csrf_token() }}" /> */}
                         <div className="p-6 bg-white border-b border-gray-200">
-                          Username
+                          Username {props.status}
                           <Input name="name"/>
                         </div>
                         <div className="p-6 bg-white border-b border-gray-200">
