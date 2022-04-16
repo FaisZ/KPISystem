@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\AdministratorController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::get('/administrator', [AdministratorController::class, 'index'])->middleware(['auth', 'verified'])->name('administrator');
+Route::get('/administrator/add_unsur', [AdministratorController::class, 'AddUnsur'])->middleware(['auth', 'verified'])->name('add_unsur');
 
 Route::get('/e', function () {
   return Inertia::render('Experiments', ['hello' => 'world']);
