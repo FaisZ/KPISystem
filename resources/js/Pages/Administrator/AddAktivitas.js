@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import Input from '@/Components/Input';
 import Button from '@/Components/Button';
 import AktivitasSelector from '@/Components/AktivitasSelector';
+import Select from 'react-select';
 
 export default function AddAktivitas(props) {
 const token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -44,7 +45,7 @@ console.log(props.allUnsur);
                           </div>
                           <div>
                             Pelaksana
-                            <Input name="rank_id"/>
+                            <Select options={ props.allRank } /*defaultValue={this.state.selectedOption}*/  placeholder={'Pilih Pelaksana'} name={'rank_id'} />
                           </div>
                           <div>
                             Angka Kredit

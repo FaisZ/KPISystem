@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Unsur;
+use App\Models\Rank;
 use App\Models\Aktivitas;
 use Auth; 
 use Inertia\Inertia;
@@ -71,11 +72,12 @@ class AdministratorController extends Controller
       try {
         //get all unsur, but convert to usable array in the js here
         $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+        $allRank = Rank::select('name AS label','id AS value')->get();
       }
       catch (Throwable $e){
-        $errors = 'Retrieving unsur failed with error: '.$e;
+        $errors = 'Retrieving aktivitas failed with error: '.$e;
       }
-      return Inertia::render($this->folder.'AddAktivitas', ['selected' => '1', 'allUnsur' => $allUnsur, 'errors' => $errors]);
+      return Inertia::render($this->folder.'AddAktivitas', ['allRank' => $allRank, 'allUnsur' => $allUnsur, 'errors' => $errors]);
     }
 
     public function newAktivitas(){
