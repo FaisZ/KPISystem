@@ -1,7 +1,7 @@
 require('./bootstrap');
 
 //react component
-require('./Pages/Experiments')
+//require('./Pages/Experiments')
 
 import React from 'react';
 import { render } from 'react-dom';
