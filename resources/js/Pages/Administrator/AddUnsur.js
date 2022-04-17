@@ -34,15 +34,17 @@ console.log(props.allUnsur);
                       <input type="hidden" name="_token" value={token} />
                         <div className="p-6 bg-white border-b border-gray-200">
                           <UnsurSelector options={props.allUnsur} value={9} label={'Pengembangan Pertanahan'} name={'parent_id'}/>
-                          <div>
+                          <div className="p-2">
                             Nama Unsur
                             <Input name="title" />
                           </div>
-                          <div>
-                            Deskripsi
+                          <div className="p-2">
+                            Informasi Tambahan (Opsional)
                             <Input name="description"/>
                           </div>
-                          <Button children='Tambahkan' />
+                          <div className="p-2">
+                            <Button children='Tambahkan' />
+                          </div>
                         </div>
                     </form>
                 </div>

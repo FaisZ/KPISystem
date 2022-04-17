@@ -59,7 +59,7 @@ function getSctructure(options,currentId){
             <div className="p-6 bg-white border-b border-gray-200">
                 <p>{this.state.structure} - <b>Aktivitas Baru</b></p>
             </div>
-            <div className="p-6 bg-white border-b border-gray-200">
+            <div className="p-2">
                 Merupakan Bagian dari Unsur
                 <Select options={ this.props.options } /*defaultValue={this.state.selectedOption}*/  placeholder={'Tidak Ada'} onChange={this.handleChange} name={this.props.name} />
             </div>
