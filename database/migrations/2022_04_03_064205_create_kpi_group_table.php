@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kpi_group', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('level');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
