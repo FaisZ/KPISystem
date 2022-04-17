@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
  
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Unsur;
+use App\Models\Aktivitas;
 use Auth; 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -24,26 +26,78 @@ class AdministratorController extends Controller
       return Inertia::render($this->folder.'AddMasterActivity', ['hello' => 'world']);
     }
 
-    public function addUnsur()
-    {
-      return Inertia::render($this->folder.'AddUnsur', ['hello' => 'world']);
+    private function _newUnsurDefaultData($errors){
+      try {
+        //get all unsur, but convert to usable array in the js here
+        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+      }
+      catch (Throwable $e){
+        $errors = 'Retrieving unsur failed with error: '.$e;
+      }
+      return Inertia::render($this->folder.'AddUnsur', ['selected' => '1', 'allUnsur' => $allUnsur, 'errors' => $errors]);
     }
 
-    public function show($id)
+    public function newUnsur()
     {
-        return view('pegawai.pegawai_dashboard', [
-            'user' => User::findOrFail($id)
-        ]);
+      return $this->_newUnsurDefaultData('');
     }
 
-    public function addActivity(Request $request)
+    public function addUnsur(Request $request)
     {
-      $save = new User;
-      $save->name = $request->name;
-      $save->email = $request->email;
-      $save->password = $request->password;
+      $errors = '';
+      try {
+        $save = new Unsur;
+        $save->title = $request->title;
+        $save->description = $request->description;
+        $level = 0;
+        if($request->parent_id != null && $request->parent_id != -1){
+          $parentId = Unsur::find($request->parent_id);
+          if($parentId==null)
+            throw new Exception("Parent Not Found. Check Query", 1);
+          $save->parent_id = $request->parent_id;
+          $level = $parentId->level+1;
+        }
+        $save->level = $level;
+        $save->save();
+      }
+      catch (Throwable $e){
+        $errors = 'Saving unsur failed with error: '.$e;
+      }
+      return $this->_newUnsurDefaultData($errors);
+    }
 
-      $save->save();
-      return Inertia::render('Experiments', ['status' => 'success']);
+    public function _newAktivitasDefaultData($errors){
+      $errors = '';
+      try {
+        //get all unsur, but convert to usable array in the js here
+        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+      }
+      catch (Throwable $e){
+        $errors = 'Retrieving unsur failed with error: '.$e;
+      }
+      return Inertia::render($this->folder.'AddAktivitas', ['selected' => '1', 'allUnsur' => $allUnsur, 'errors' => $errors]);
+    }
+
+    public function newAktivitas(){
+      return $this->_newAktivitasDefaultData('');
+    }
+
+    public function addAktivitas(Request $request)
+    {
+      $errors = '';
+      try {
+        $save = new Aktivitas;
+        $save->title = $request->title;
+        $save->description = $request->description;
+        $save->rank_id = $request->rank_id;
+        $save->credit_value = $request->credit_value;
+        $save->kpi_group_id = $request->kpi_group_id;
+        $save->has_file = true;
+        $save->save();
+      }
+      catch (Throwable $e){
+        $errors = 'Saving aktivitas failed with error: '.$e;
+      }
+      return $this->_newAktivitasDefaultData($errors);
     }
 }

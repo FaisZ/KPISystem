@@ -2,32 +2,23 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import ShoppingList from '@/Components/ShoppingList';
-import TicTacToe from '@/Components/TicTacToe';
-import TicTacToeChild from '@/Components/TicTacToeChild';
 import Input from '@/Components/Input';
 import Button from '@/Components/Button';
-import Dropdown from 'reactjs-dropdown-component';
-import Select from 'react-select';
+import UnsurSelector from '@/Components/UnsurSelector';
 
 export default function AddUnsur(props) {
-  const token = document.head.querySelector('meta[name="csrf-token"]').content;
-  const unsurDropDownChilds = ['mama','mimi'];
-  const techCompanies = [
-    { label: "Apple", value: 1 },
-    { label: "Facebook", value: 2 },
-    { label: "Netflix", value: 3 },
-    { label: "Tesla", value: 4 },
-    { label: "Amazon", value: 5 },
-    { label: "Alphabet", value: 6 },
-  ];
-  
-  const onChange = (item, name) => {
-    $x = name;
-  }
-  
+const token = document.head.querySelector('meta[name="csrf-token"]').content;
+const techCompanies = [
+  { label: "Apple", value: 1 },
+  { label: "Facebook", value: 2 },
+  { label: "Netflix", value: 3 },
+  { label: "Tesla", value: 4 },
+  { label: "Amazon", value: 5 },
+  { label: "Alphabet", value: 6 },
+];
+console.log(props.allUnsur);
+
   return (
       <Authenticated
       auth={props.auth}
@@ -39,21 +30,20 @@ export default function AddUnsur(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                  <div className="p-6 bg-white border-b border-gray-200">
-                    Visualisasi
-                    Unsur 1
-                  </div>
-                    <form method="POST" action="/e/addPegawai">
+                    <form method="POST" action="/administrator/add_unsur">
                       <input type="hidden" name="_token" value={token} />
-                      {/* <input type="hidden" name="_token" value="{{ csrf_token() }}" /> */}
                         <div className="p-6 bg-white border-b border-gray-200">
-                          Sub-Unsur dari Unsur
-                            <Select options={ techCompanies } />
-                          Nama Unsur
-                          <Input name="name"/>
+                          <UnsurSelector options={props.allUnsur} value={9} label={'Pengembangan Pertanahan'} name={'parent_id'}/>
+                          <div>
+                            Nama Unsur
+                            <Input name="title" />
+                          </div>
+                          <div>
+                            Deskripsi
+                            <Input name="description"/>
+                          </div>
+                          <Button children='Tambahkan' />
                         </div>
-                        <Button children='Tambahkan' />
-                        {/* <ShoppingList name="Blast"/> */}
                     </form>
                 </div>
             </div>
@@ -66,17 +56,3 @@ export default function AddUnsur(props) {
 if (document.getElementById('experiments')) {
   ReactDOM.render(<Experiments />, document.getElementById('experiments'));
 }
-
-// const App = () => {
-//   return (
-//     <Container maxWidth="sm">
-//       <Typography component="div" style={{ 
-//         backgroundColor: 'Orange', height: '100vh' 
-//       }}>
-//         Greetings from GeeksforGeeks
-//       </Typography>
-//     </Container>
-//   );
-// }
-  
-// export default App

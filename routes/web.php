@@ -36,7 +36,11 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/administrator', [AdministratorController::class, 'index'])->middleware(['auth', 'verified'])->name('administrator');
-Route::get('/administrator/add_unsur', [AdministratorController::class, 'AddUnsur'])->middleware(['auth', 'verified'])->name('add_unsur');
+Route::get('/administrator/add_unsur', [AdministratorController::class, 'newUnsur'])->middleware(['auth', 'verified'])->name('add_unsur');
+Route::post('/administrator/add_unsur', [AdministratorController::class, 'addUnsur'])->middleware(['auth', 'verified'])->name('add_unsur');
+
+Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'newAktivitas'])->middleware(['auth', 'verified'])->name('add_aktivitas');
+Route::post('/administrator/add_aktivitas', [AdministratorController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('add_aktivitas');
 
 Route::get('/e', function () {
   return Inertia::render('Experiments', ['hello' => 'world']);
