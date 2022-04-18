@@ -44,24 +44,40 @@ function getBukties(){
     return rows;
 }
 
-function addBukties(rows){
-    var idString ='tes';
-    rows.push(<div className="p-2"><Input name={idString} /></div>);
+function getBukties2(){
+    var rows = [];
+    var idString;
+    for (var i = 0; i < 7; i++) {
+        idString = 'bukti'+i;
+        rows.push(<div className="p-2"><Input key={i} name={idString} /></div>);
+    }
     return rows;
 }
+
 
 class Board extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            rows: getBukties()
+            rows: [],
+            index: 0
             
         };
         //console.log(this.state.selectedOption);
     }
-    handleChange = (selectedOption) => {
-        //this.setState({selectedOption});
-        this.setState({rows: addBukties(this.state.rows)})
+    addBukties = () => {
+        var rows = [];
+        var idString;
+        for (var i = 0; i <= this.state.index; i++) {
+            idString = 'bukti'+i;
+            rows.push(<div className="p-2"><Input key={i} name={idString} /></div>);
+        }
+        return rows;
+    }
+
+    handleChange = () => {
+        this.setState({index: this.state.index + 1})
+        this.setState({rows: this.addBukties()})
         //console.log(selectedOption.parent_id);
     }
 
