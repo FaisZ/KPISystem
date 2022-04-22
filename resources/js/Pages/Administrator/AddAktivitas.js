@@ -56,7 +56,7 @@ console.log(props.allUnsur);
                       </div>
                       <div className="p-2">
                         Angka Kredit
-                        <Input name="credit_value"/>
+                        <Input name="credit_value" type={'number'} />
                       </div>
                       <div className="p-2">
                         Informasi Tambahan (Opsional)
