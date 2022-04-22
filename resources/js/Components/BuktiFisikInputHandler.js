@@ -69,8 +69,8 @@ class Board extends React.Component {
         var rows = [];
         var idString;
         for (var i = 0; i <= this.state.index; i++) {
-            idString = 'bukti'+i;
-            rows.push(<div className="p-2"><Input key={i} name={idString} /></div>);
+            idString = 'bukti[]';
+            rows.push(<div  key={i} className="p-2"><Input name={idString} /></div>);
         }
         return rows;
     }
