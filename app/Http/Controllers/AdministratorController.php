@@ -45,8 +45,7 @@ class AdministratorController extends Controller
       return $this->_newUnsurDefaultData('');
     }
 
-    public function addUnsur(Request $request)
-    {
+    public function addUnsur(Request $request){
       $errors = '';
       try {
         $save = new Unsur;
@@ -69,6 +68,19 @@ class AdministratorController extends Controller
       return $this->_newUnsurDefaultData($errors);
     }
 
+    public function listAktivitas(){
+      $errors = '';
+      try {
+        //get all unsur, but convert to usable array in the js here
+        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+        $allRank = Rank::select('name AS label','id AS value')->get();
+      }
+      catch (Throwable $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e;
+      }
+      return Inertia::render($this->folder.'ListAktivitas', ['allRank' => $allRank, 'allUnsur' => $allUnsur, 'errors' => $errors]);
+    }
+
     public function _newAktivitasDefaultData($errors){
       $errors = '';
       try {
@@ -86,8 +98,7 @@ class AdministratorController extends Controller
       return $this->_newAktivitasDefaultData('');
     }
 
-    public function addAktivitas(Request $request)
-    {
+    public function addAktivitas(Request $request){
       $errors = '';
       try {
         $activity = new Aktivitas;
@@ -127,5 +138,9 @@ class AdministratorController extends Controller
         $errors = 'Saving bukti failed with error: '.$e;
       }
       return $this->_newAktivitasDefaultData($errors);
+    }
+
+    public function editAktivitas(Request $request){
+
     }
 }

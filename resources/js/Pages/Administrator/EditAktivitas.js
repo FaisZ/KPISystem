@@ -10,7 +10,7 @@ import Select from 'react-select';
 import TahapanInput from '@/Components/TahapanInput';
 import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
 
-export default function AddAktivitas(props) {
+export default function EditAktivitas(props) {
   const token = document.head.querySelector('meta[name="csrf-token"]').content;
 
   return (
