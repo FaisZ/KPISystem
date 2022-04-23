@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Unsur;
 use App\Models\Rank;
 use App\Models\Aktivitas;
+use App\Models\Tahapan;
+use App\Models\BuktiFisik;
 use Auth; 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -88,17 +90,41 @@ class AdministratorController extends Controller
     {
       $errors = '';
       try {
-        $save = new Aktivitas;
-        $save->title = $request->title;
-        $save->description = $request->description;
-        $save->rank_id = $request->rank_id;
-        $save->credit_value = $request->credit_value;
-        $save->kpi_group_id = $request->kpi_group_id;
-        $save->has_file = true;
-        $save->save();
+        $activity = new Aktivitas;
+        $activity->title = $request->title;
+        $activity->description = $request->description;
+        $activity->rank_id = $request->rank_id;
+        $activity->credit_value = $request->credit_value;
+        $activity->kpi_group_id = $request->kpi_group_id;
+        $activity->has_file = true;
+        $activity->save();
       }
       catch (Throwable $e){
         $errors = 'Saving aktivitas failed with error: '.$e;
+      }
+      try {
+        $tahapan = new Tahapan;
+        $tahapan->kpi_activity_id = $activity->id;
+        $tahapan->description = $request->tahapan;
+        $tahapan->save();
+      }
+      catch (Throwable $e){
+        Aktivitas::destroy($activity->id);
+        $errors = 'Saving tahapan failed with error: '.$e;
+      }
+      try {
+        foreach($request->bukti as $buct){
+          $bukti = new BuktiFisik;
+          $bukti->kpi_activity_id = $activity->id;
+          $bukti->description = $buct;
+          $bukti->file_type = 'document';
+          $bukti->save();
+        }
+      }
+      catch (Exception $e){
+        Aktivitas::destroy($activity->id);
+        Tahapan::destroy($tahapan->id);
+        $errors = 'Saving bukti failed with error: '.$e;
       }
       return $this->_newAktivitasDefaultData($errors);
     }

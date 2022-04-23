@@ -20,40 +20,6 @@ export default function BuktiFisikInputHandler({
         <Board options = {options} value={value} label={label} name={name}/>
     );
 }
-function getSctructure(options,currentId){
-    if(currentId==null || currentId==0)
-        return '';
-    else{
-        var res = options.find(option => {
-            return option.value === currentId;
-          });
-        if(res.parent_id==null ||res.parent_id==0)
-            return res.label;
-        else
-            return ''+getSctructure(options,res.parent_id)+' - '+res.label;
-        }
-}
-
-function getBukties(){
-    var rows = [];
-    var idString;
-    for (var i = 0; i < 4; i++) {
-        idString = 'bukti'+i;
-        rows.push(<div className="p-2"><Input key={i} name={idString} /></div>);
-    }
-    return rows;
-}
-
-function getBukties2(){
-    var rows = [];
-    var idString;
-    for (var i = 0; i < 7; i++) {
-        idString = 'bukti'+i;
-        rows.push(<div className="p-2"><Input key={i} name={idString} /></div>);
-    }
-    return rows;
-}
-
 
 class Board extends React.Component {
     constructor(props){

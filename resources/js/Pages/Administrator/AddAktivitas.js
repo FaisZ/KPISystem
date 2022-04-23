@@ -11,16 +11,15 @@ import TahapanInput from '@/Components/TahapanInput';
 import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
 
 export default function AddAktivitas(props) {
-const token = document.head.querySelector('meta[name="csrf-token"]').content;
-const techCompanies = [
-  { label: "Apple", value: 1 },
-  { label: "Facebook", value: 2 },
-  { label: "Netflix", value: 3 },
-  { label: "Tesla", value: 4 },
-  { label: "Amazon", value: 5 },
-  { label: "Alphabet", value: 6 },
-];
-console.log(props.allUnsur);
+  const token = document.head.querySelector('meta[name="csrf-token"]').content;
+  const techCompanies = [
+    { label: "Apple", value: 1 },
+    { label: "Facebook", value: 2 },
+    { label: "Netflix", value: 3 },
+    { label: "Tesla", value: 4 },
+    { label: "Amazon", value: 5 },
+    { label: "Alphabet", value: 6 },
+  ];
 
   return (
       <Authenticated
@@ -31,6 +30,11 @@ console.log(props.allUnsur);
     <Container maxWidth="lg">
             <Head title="Tambah Master Data Aktivitas" />
 
+              <div className="p-6 bg-white border-b border-gray-200">
+                <div>
+                    Errors: {props.errors}
+                </div>
+              </div>
             <form method="POST" action="/administrator/add_aktivitas">
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -68,7 +72,7 @@ console.log(props.allUnsur);
                     <div className="p-6 bg-white border-b border-gray-200">
                       <div className="p-2">
                         Tahapan
-                        <TahapanInput name="title" />
+                        <TahapanInput name="tahapan" />
                       </div>
                     </div>
                 </div>
