@@ -9,15 +9,6 @@ import UnsurSelector from '@/Components/UnsurSelector';
 
 export default function AddUnsur(props) {
 const token = document.head.querySelector('meta[name="csrf-token"]').content;
-const techCompanies = [
-  { label: "Apple", value: 1 },
-  { label: "Facebook", value: 2 },
-  { label: "Netflix", value: 3 },
-  { label: "Tesla", value: 4 },
-  { label: "Amazon", value: 5 },
-  { label: "Alphabet", value: 6 },
-];
-console.log(props.allUnsur);
 
   return (
       <Authenticated

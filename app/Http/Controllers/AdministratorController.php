@@ -52,7 +52,9 @@ class AdministratorController extends Controller
         $save->title = $request->title;
         $save->description = $request->description;
         $level = 0;
+        //if tidak ada is not chosen
         if($request->parent_id != null && $request->parent_id != -1){
+          //make sure data is present
           $parentId = Unsur::find($request->parent_id);
           if($parentId==null)
             throw new Exception("Parent Not Found. Check Query", 1);

@@ -9,7 +9,7 @@ import AktivitasSelector from '@/Components/AktivitasSelector';
 import Select from 'react-select';
 import TahapanInput from '@/Components/TahapanInput';
 import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
-import AktivitasList from '@/Components/AktivitasList';
+import AktivitasListComponent from '@/Components/AktivitasListComponent';
 
 export default function ListAktivitas(props) {
   const token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -18,7 +18,7 @@ export default function ListAktivitas(props) {
       <Authenticated
       auth={props.auth}
       errors={props.errors}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Buat Aktivitas Baru</h2>}
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Daftar Aktivitas</h2>}
   >
     <Container maxWidth="lg">
             <Head title="Tambah Master Data Aktivitas" />
@@ -32,8 +32,7 @@ export default function ListAktivitas(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                   <input type="hidden" name="_token" value={token} />
                     <div className="p-6 bg-white border-b border-gray-200">
-                      <AktivitasList/>
-                      <AktivitasSelector options={props.allUnsur} value={9} label={'Pengembangan Pertanahan'} name={'kpi_group_id'}/>
+                      <AktivitasListComponent/>
                     </div>
                 </div>
             </div>

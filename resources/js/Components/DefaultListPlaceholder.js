@@ -2,7 +2,6 @@
   import styled from 'styled-components'
   import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-table'
   // A great library for fuzzy filtering/sorting items
-  //import matchSorter from 'match-sorter'
   import { matchSorter } from 'match-sorter'
   import { regeneratorRuntime} from 'regenerator-runtime'
 
@@ -49,14 +48,14 @@
   
     return (
       <span>
-        Search:{' '}
+        Cari:{' '}
         <input
           value={value || ""}
           onChange={e => {
             setValue(e.target.value);
             onChange(e.target.value);
           }}
-          placeholder={`${count} records...`}
+          placeholder={`${count} data...`}
           style={{
             fontSize: '1.1rem',
             border: '0',
@@ -78,7 +77,7 @@
         onChange={e => {
           setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
-        placeholder={`Search ${count} records...`}
+        placeholder={`Cari dari ${count} data...`}
       />
     )
   }
@@ -106,7 +105,7 @@
           setFilter(e.target.value || undefined)
         }}
       >
-        <option value="">All</option>
+        <option value="">Semua</option>
         {options.map((option, i) => (
           <option key={i} value={option}>
             {option}
@@ -310,12 +309,6 @@
           </tbody>
         </table>
         <br />
-        <div>Showing the first 20 results of {rows.length} rows</div>
-        <div>
-          <pre>
-            <code>{JSON.stringify(state.filters, null, 2)}</code>
-          </pre>
-        </div>
       </>
     )
   }
@@ -334,7 +327,7 @@
   // check, but here, we want to remove the filter if it's not a number
   filterGreaterThan.autoRemove = val => typeof val !== 'number'
   
-  function App() {
+  function AktivitasList() {
     const columns = React.useMemo(
       () => [
         {
@@ -411,7 +404,7 @@
             age: Math.floor(Math.random() * 30),
             visits: Math.floor(Math.random() * 100),
             progress: Math.floor(Math.random() * 100),
-            status: 'relationship'
+            status: 'dontknow'
           },
         ],
         []
@@ -424,5 +417,5 @@
     )
   }
   
-  export default App
+  export default AktivitasList
   
