@@ -358,13 +358,13 @@
             {'>>'}
           </button>{' '}
           <span>
-            Page{' '}
+            Halaman{' '}
             <strong>
-              {pageIndex + 1} of {pageOptions.length}
+              {pageIndex + 1} dari {pageOptions.length}
             </strong>{' '}
           </span>
           <span>
-            | Go to page:{' '}
+            | Ke halaman:{' '}
             <input
               type="number"
               defaultValue={pageIndex + 1}
@@ -381,9 +381,9 @@
               setPageSize(Number(e.target.value))
             }}
           >
-            {[10, 20, 30, 40, 50].map(pageSize => (
+            {[1, 2, 3, 10, 20].map(pageSize => (
               <option key={pageSize} value={pageSize}>
-                Show {pageSize}
+                Munculkan {pageSize}
               </option>
             ))}
           </select>
