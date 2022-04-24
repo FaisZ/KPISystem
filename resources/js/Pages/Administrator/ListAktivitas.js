@@ -10,6 +10,7 @@ import Select from 'react-select';
 import TahapanInput from '@/Components/TahapanInput';
 import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
 import AktivitasListComponent from '@/Components/AktivitasListComponent';
+import MaterialUIKitchenSink from '@/Components/MaterialUIKitchenSink';
 
 export default function ListAktivitas(props) {
   const token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -32,7 +33,7 @@ export default function ListAktivitas(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                   <input type="hidden" name="_token" value={token} />
                     <div className="p-6 bg-white border-b border-gray-200">
-                      <AktivitasListComponent/>
+                      <MaterialUIKitchenSink/>
                     </div>
                 </div>
             </div>
