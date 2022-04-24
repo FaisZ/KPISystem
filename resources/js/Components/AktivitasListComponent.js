@@ -328,7 +328,7 @@
             </tr>
           </thead>
           <tbody {...getTableBodyProps()}>
-            {firstPageRows.map((row, i) => {
+            {page.map((row, i) => {
               prepareRow(row)
               return (
                 <tr {...row.getRowProps()}>
