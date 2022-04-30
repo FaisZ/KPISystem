@@ -22,11 +22,11 @@ export default function AddAktivitas(props) {
     <Container maxWidth="lg">
             <Head title="Tambah Master Data Aktivitas" />
 
-              <div className="p-6 bg-white border-b border-gray-200">
+              {/* <div className="p-6 bg-white border-b border-gray-200">
                 <div>
                     Errors: {props.errors}
                 </div>
-              </div>
+              </div> */}
             <form method="POST" action="/administrator/add_aktivitas">
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
