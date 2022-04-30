@@ -3,14 +3,15 @@ import React from 'react';
 import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import Container from '@material-ui/core/Container';
-import Input from '@/Components/Input';
-import Button from '@/Components/Button';
-import AktivitasSelector from '@/Components/AktivitasSelector';
-import Select from 'react-select';
-import TahapanInput from '@/Components/TahapanInput';
-import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
-import AktivitasListComponent from '@/Components/AktivitasListComponent';
-import MaterialUIKitchenSink from '@/Components/MaterialUIKitchenSink';
+// import Input from '@/Components/Input';
+// import Button from '@/Components/Button';
+// import AktivitasSelector from '@/Components/AktivitasSelector';
+// import Select from 'react-select';
+// import TahapanInput from '@/Components/TahapanInput';
+// import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
+// import AktivitasListComponent from '@/Components/AktivitasListComponent';
+//import MaterialUIKitchenSink from '@/Components/MaterialUIKitchenSink';
+import ActivityTable from '@/Components/ActivityTable';
 
 export default function ListAktivitas(props) {
   const token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -33,7 +34,7 @@ export default function ListAktivitas(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                   <input type="hidden" name="_token" value={token} />
                     <div className="p-6 bg-white border-b border-gray-200">
-                      <MaterialUIKitchenSink/>
+                      <ActivityTable/>
                     </div>
                 </div>
             </div>
