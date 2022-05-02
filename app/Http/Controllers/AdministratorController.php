@@ -73,14 +73,15 @@ class AdministratorController extends Controller
     public function listAktivitas(){
       $errors = '';
       try {
-        //get all unsur, but convert to usable array in the js here
-        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+        $aktivitas = new Aktivitas();
+        $allAktivitas = $aktivitas->getFullActivity();
         $allRank = Rank::select('name AS label','id AS value')->get();
+        //$rank = Aktivitas
       }
       catch (Throwable $e){
         $errors = 'Retrieving aktivitas failed with error: '.$e;
       }
-      return Inertia::render($this->folder.'ListAktivitas', ['allRank' => $allRank, 'allUnsur' => $allUnsur, 'errors' => $errors]);
+      return Inertia::render($this->folder.'ListAktivitas', ['allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'errors' => $errors]);
     }
 
     public function _newAktivitasDefaultData($errors){

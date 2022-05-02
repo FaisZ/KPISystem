@@ -22,19 +22,19 @@ export default function ListAktivitas(props) {
       errors={props.errors}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Daftar Aktivitas</h2>}
   >
-    <Container maxWidth="lg">
+    <Container>
             <Head title="Tambah Master Data Aktivitas" />
 
-              <div className="p-6 bg-white border-b border-gray-200">
+              <div className="p-6 bg-white">
                 <div>
                     Errors: {props.errors}
                 </div>
               </div>
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                  <input type="hidden" name="_token" value={token} />
+                <div className="max-w-full min-w-full">
+                <input type="hidden" name="_token" value={token} />
                     <div className="p-6 bg-white border-b border-gray-200">
-                      <ActivityTable/>
+                      <ActivityTable tableData={props.allAktivitas}/>
                     </div>
                 </div>
             </div>

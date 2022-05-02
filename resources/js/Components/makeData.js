@@ -11,10 +11,10 @@ const range = len => {
 const newPerson = () => {
   const statusChance = Math.random()
   return {
-    firstName: 'First Name',//namor.generate({ words: 1, numbers: 0 }),
-    lastName: 'Last Name',//namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
+    unsur: 'First Name',//namor.generate({ words: 1, numbers: 0 }),
+    aktivitas: 'Last Name',//namor.generate({ words: 1, numbers: 0 }),
+    jabatan: Math.floor(Math.random() * 30),
+    angkaKredit: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),
     status:
       statusChance > 0.66

@@ -1,13 +1,13 @@
 import React from 'react'
 
 import Checkbox from '@material-ui/core/Checkbox'
-import MaUTable from '@material-ui/core/Table'
 import PropTypes from 'prop-types'
+import MaUTable from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
-import TableFooter from '@material-ui/core/TableFooter'
 import TableHead from '@material-ui/core/TableHead'
+import TableFooter from '@material-ui/core/TableFooter'
 import TablePagination from '@material-ui/core/TablePagination'
 import TablePaginationActions from './TablePaginationActions'
 import TableRow from '@material-ui/core/TableRow'
@@ -71,12 +71,14 @@ const EditableCell = ({
   }, [initialValue])
 
   return (
-    <input
-      style={inputStyle}
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-    />
+    <div key={id} >
+      <input
+        style={inputStyle}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+    </div>
   )
 }
 
@@ -193,9 +195,9 @@ const ActivitySpecificEnhancedTable = ({
   return (
     <TableContainer>
       <TableToolbar
-        numSelected={Object.keys(selectedRowIds).length}
-        deleteUserHandler={deleteUserHandler}
-        addUserHandler={addUserHandler}
+        // numSelected={Object.keys(selectedRowIds).length}
+        // deleteUserHandler={deleteUserHandler}
+        // addUserHandler={addUserHandler}
         preGlobalFilteredRows={preGlobalFilteredRows}
         setGlobalFilter={setGlobalFilter}
         globalFilter={globalFilter}
@@ -228,7 +230,8 @@ const ActivitySpecificEnhancedTable = ({
             prepareRow(row)
             return (
               // Use a React.Fragment here so the table markup is still valid
-              <React.Fragment {...row.getRowProps()}>
+              // <React.Fragment {...row.getRowProps()}>
+              <React.Fragment>
                 <TableRow {...row.getToggleRowExpandedProps()}>
                   {row.cells.map(cell => {
                     return (
