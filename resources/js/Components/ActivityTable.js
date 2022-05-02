@@ -69,27 +69,6 @@ const ActivityTable = ({
 
   //const [data, setData] = React.useState(React.useMemo(() => makeData(20), []))
   const [data, setData] = React.useState(React.useMemo(() => tableData, []))
-  // const [data, setData] = React.useState(React.useMemo(() => 
-  // [
-  //   {
-  //     Header: 'Unsur',
-  //     accessor: 'firstName',
-  //   },
-  //   {
-  //     Header: 'Aktivitas',
-  //     accessor: 'lastName',
-  //   },
-  //   {
-  //     Header: 'Jabatan',
-  //     accessor: 'age',
-  //   },
-  //   {
-  //     Header: 'Angka Kredit',
-  //     accessor: 'visits',
-  //   }
-  // ],
-  // []  
-  // ))
   const [skipPageReset, setSkipPageReset] = React.useState(false)
 
   // We need to keep the table from resetting the pageIndex when we
