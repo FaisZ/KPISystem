@@ -44,6 +44,8 @@ Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'new
 Route::post('/administrator/add_aktivitas', [AdministratorController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('add_aktivitas');
 Route::get('/administrator/edit_aktivitas', [AdministratorController::class, 'editAktivitas'])->middleware(['auth', 'verified'])->name('edit_aktivitas');
 
+Route::get('/administrator/users', [AdministratorController::class, 'listUsers'])->middleware(['auth', 'verified'])->name('master_users');
+
 Route::get('/e', function () {
   return Inertia::render('Experiments', ['hello' => 'world']);
 })->middleware(['auth', 'verified'])->name('e');

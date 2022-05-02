@@ -84,6 +84,18 @@ class AdministratorController extends Controller
       return Inertia::render($this->folder.'ListAktivitas', ['allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
     }
 
+    public function listUsers(){
+      $errors = '';
+      try {
+        $users = new User();
+        $allUsers = $users->getAllUsers();
+      }
+      catch (Throwable $e){
+        $errors = 'Retrieving users failed with error: '.$e;
+      }
+      return Inertia::render($this->folder.'ListUsers', ['allUsers' => $allUsers, 'errors' => $errors]);
+    }
+
     public function _newAktivitasDefaultData($errors){
       $errors = '';
       try {
