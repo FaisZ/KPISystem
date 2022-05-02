@@ -13,7 +13,8 @@ import TableRow from '@material-ui/core/TableRow'
 import { styled } from '@material-ui/core'
 
 const ActivityTable = ({
-  tableData
+  tableData,
+  buktiFisikData
 }) => {
   const columns = React.useMemo(
     () => [
@@ -36,6 +37,7 @@ const ActivityTable = ({
       {
         // Make an expander cell
         Header: 'Tahapan',
+        //accessor: 'tahapan',
         id: 'tahapan', // It needs an ID
         Cell: ({ row }) => (
           // Use Cell to render an expander for each row.
@@ -103,6 +105,14 @@ const ActivityTable = ({
     },
   }));
   
+  function drawTahapanAndBuktiFisik(selectedActivityIndex){
+    var res = [];
+    for(var i=0; i<count(buktiFisikData[selectedActivityIndex]); i++){
+      res.push(<TableCell>({buktiFisikData[selectedActivityIndex][i].description}) </TableCell>)
+    }
+    return res;
+  }
+
   // Create a function that will render our row sub components
   const renderRowSubComponent = React.useCallback(
     ({ row }) => (
@@ -115,27 +125,21 @@ const ActivityTable = ({
                 Tahapan
               </TableCell>
               <TableCell>
-                Bukti Fisik
+                Bukti Fisik 
               </TableCell>
             </TableRow>
         </TableHead>
         <TableBody>
-        <TableRow>
             <TableCell>
-              Tahapan 1
+              {tableData[row.index].tahapan}
             </TableCell>
-            <TableCell>
-              Bukti Fisik 1
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              Tahapan 2
-            </TableCell>
-            <TableCell>
-              Bukti Fisik 2
-            </TableCell>
-          </TableRow>
+              <TableCell>
+                {buktiFisikData[row.index].map(function(object, i){
+                    return <div key={i}>
+                      {object.description}
+                    </div>;
+                })}
+              </TableCell>
         </TableBody>
       </MaUTable>
       </pre>

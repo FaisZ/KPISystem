@@ -34,12 +34,32 @@ class Aktivitas extends Authenticatable
         ->leftJoin('rank','kpi_activity.rank_id','=','rank.id')
         ->leftJoin('tahapan','kpi_activity.id','=','tahapan.kpi_activity_id')
         // ->leftJoin('bukti_fisik','kpi_activity.id','=','bukti_fisik.kpi_activity_id')
+        ->orderBy('kpi_activity.id')
         ->get();
     }
     public function getAllBukti(){
-        return DB::table('kpi_activity')
-        ->select('kpi_activity.id','bukti_fisik.description')
+        $allBukti = DB::table('kpi_activity')
+        ->select('kpi_activity.id AS id','bukti_fisik.description AS description')
         ->leftJoin('bukti_fisik','kpi_activity.id','=','bukti_fisik.kpi_activity_id')
+        ->orderBy('kpi_activity.id')
         ->get();
+        $filteredBukti = [];
+        $activityCounter = 0;
+        $buktiCounter = 0;
+        for($i=0; $i < count($allBukti); $i++){
+            //if its the same as before
+            if($i==0 || ($allBukti[$i]->id == $allBukti[$i-1]->id)){
+                $filteredBukti[$activityCounter][$buktiCounter] = $allBukti[$i];
+                $buktiCounter++;
+            }
+            else{
+                $activityCounter++;
+                $buktiCounter = 0;
+                $filteredBukti[$activityCounter][$buktiCounter] = $allBukti[$i];
+                $buktiCounter++;
+            }
+        }
+        // error_log(json_encode($filteredBukti));
+        return $filteredBukti;
     }
 }

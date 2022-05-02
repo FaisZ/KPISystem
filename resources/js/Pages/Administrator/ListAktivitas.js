@@ -27,14 +27,14 @@ export default function ListAktivitas(props) {
         <Head title="Tambah Master Data Aktivitas" />
         <div className="col-8 p-6 bg-white">
           <div>
-            Errors: {props.errors}
+            Errors: {props.allAktivitas[1].tahapan}
           </div>
         </div>
         <div className="py-12">
           <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <input type="hidden" name="_token" value={token} />
             <div className="p-6 bg-white border-b border-gray-200">
-              <ActivityTable tableData={props.allAktivitas}/>
+              <ActivityTable tableData={props.allAktivitas} buktiFisikData={props.allBukti}/>
             </div>
           </div>
         </div>
