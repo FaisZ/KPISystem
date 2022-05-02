@@ -35,11 +35,12 @@ const TableToolbar = props => {
   const classes = useToolbarStyles()
   const {
     numSelected,
-    addUserHandler,
-    deleteUserHandler,
+    // addUserHandler,
+    // deleteUserHandler,
     preGlobalFilteredRows,
     setGlobalFilter,
     globalFilter,
+    tableName
   } = props
   return (
     <Toolbar
@@ -47,7 +48,7 @@ const TableToolbar = props => {
         [classes.highlight]: numSelected > 0,
       })}
     >
-      <AddUserDialog addUserHandler={addUserHandler} />
+      {/* <AddUserDialog addUserHandler={addUserHandler} /> */}
       {numSelected > 0 ? (
         <Typography
           className={classes.title}
@@ -58,7 +59,7 @@ const TableToolbar = props => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle">
-          Users
+          {tableName}
         </Typography>
       )}
 
@@ -80,12 +81,12 @@ const TableToolbar = props => {
 }
 
 TableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  addUserHandler: PropTypes.func.isRequired,
-  deleteUserHandler: PropTypes.func.isRequired,
-  setGlobalFilter: PropTypes.func.isRequired,
+  //numSelected: PropTypes.number.isRequired,
+  //addUserHandler: PropTypes.func.isRequired,
+  //deleteUserHandler: PropTypes.func.isRequired,
+  //setGlobalFilter: PropTypes.func.isRequired,
   preGlobalFilteredRows: PropTypes.array.isRequired,
-  globalFilter: PropTypes.string.isRequired,
+  //globalFilter: PropTypes.string.isRequired,
 }
 
 export default TableToolbar

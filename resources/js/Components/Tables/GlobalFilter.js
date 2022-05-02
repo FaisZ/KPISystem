@@ -65,7 +65,7 @@ const GlobalFilter = ({
         onChange={e => {
           setGlobalFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
-        placeholder={`${count} records...`}
+        placeholder={`${count} data...`}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
@@ -78,7 +78,7 @@ const GlobalFilter = ({
 
 GlobalFilter.propTypes = {
   preGlobalFilteredRows: PropTypes.array.isRequired,
-  globalFilter: PropTypes.string.isRequired,
+  //globalFilter: PropTypes.string.isRequired,
   setGlobalFilter: PropTypes.func.isRequired,
 }
 
