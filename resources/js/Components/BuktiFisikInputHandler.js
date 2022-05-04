@@ -32,12 +32,19 @@ class Board extends React.Component {
         var idString = 'bukti[]';
         if(this.props.buktiFisikData!=null){
             for (var i = 0; i < this.props.buktiFisikData.length; i++) {
-                this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/></div>);
+                this.state.rows.push(
+                    <div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}>
+                        <Input hidden="true" name={'bukti_id[]'} value={this.props.buktiFisikData[i].bukti_id}/>
+                        <Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/>
+                    </div>
+                );
                 this.state.index++;
             }
         }
         else{
-            this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+            this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}>
+                <Input hidden="true" name={'bukti_id[]'} value={'-1'}/>
+                <Input name={idString} /></div>);
             this.state.index++;
         }
         //console.log(this.state.selectedOption);
@@ -45,7 +52,9 @@ class Board extends React.Component {
     addBukties = () => {
         var newRow = [];
         var idString = 'bukti[]';
-        newRow.push(<div  key={this.state.index} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+        newRow.push(<div  key={this.state.index} style={{marginLeft:'10px',marginBottom:'2px'}}>
+            <Input hidden="true" name={'bukti_id[]'} value={'-1'}/>
+            <Input name={idString} /></div>);
         this.setState(prevState => ({
             rows: [...prevState.rows, newRow]
           }))

@@ -177,22 +177,28 @@ class AdministratorController extends Controller
       catch (Throwable $e){
         $errors = 'Saving tahapan failed with error: '.$e;
       }
-      // try {
-      //   foreach($request->bukti as $buct){
-      //     $bukti = new BuktiFisik;
-      //     $bukti->kpi_activity_id = $activity->id;
-      //     $bukti->description = $buct;
-      //     $bukti->file_type = 'document';
-      //     $bukti->save();
-      //   }
-      // }
-      // catch (Exception $e){
-      //   Aktivitas::destroy($activity->id);
-      //   Tahapan::destroy($tahapan->id);
-      //   $errors = 'Saving bukti failed with error: '.$e;
-      // }
-      // return $this->_newAktivitasDefaultData($errors);
-      // return Redirect::route('users.index');
+      try {
+        for($i=0; $i<count($request->bukti); $i++){
+          //find existing bukti
+          if($request->bukti_id[$i]!=null && $request->bukti_id[$i]!=-1){
+            $bukti = BuktiFisik::find($request->bukti_id[$i]);
+            if($bukti==null)
+              throw new Exception("bukti fisik not found", 1);
+          }
+          //add new bukti
+          else{
+            $bukti = new BuktiFisik;
+            $bukti->kpi_activity_id = $activity->id;
+          }
+          $bukti->description = $request->bukti[$i];
+          $bukti->file_type = 'document';
+          $bukti->save();
+        }
+      }
+      catch (Exception $e){
+        $errors = 'Updating bukti failed with error: '.$e;
+      }
+
       return redirect()->back()->with('errors', $errors);
     }
 

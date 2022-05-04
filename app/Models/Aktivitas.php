@@ -40,7 +40,7 @@ class Aktivitas extends Authenticatable
     }
     public function getAllBukti(){
         $allBukti = DB::table('kpi_activity')
-        ->select('kpi_activity.id AS id','bukti_fisik.description AS description')
+        ->select('kpi_activity.id AS id','bukti_fisik.id AS bukti_id','bukti_fisik.description AS description')
         ->leftJoin('bukti_fisik','kpi_activity.id','=','bukti_fisik.kpi_activity_id')
         ->orderBy('kpi_activity.id')
         ->get();
