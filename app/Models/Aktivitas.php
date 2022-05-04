@@ -58,6 +58,8 @@ class Aktivitas extends Authenticatable
                 $filteredBukti[$activityCounter][$buktiCounter] = $allBukti[$i];
                 $buktiCounter++;
             }
+            error_log('actCount:' .$activityCounter);
+            error_log('buctCount:' .$buktiCounter);
         }
         // error_log(json_encode($filteredBukti));
         return $filteredBukti;

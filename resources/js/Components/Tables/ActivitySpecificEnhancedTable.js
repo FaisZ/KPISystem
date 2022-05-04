@@ -241,7 +241,7 @@ const ActivitySpecificEnhancedTable = ({
                   <ReactModal 
                     modalOpenText={'Edit'} 
                     modalTitle={'Edit Aktivitas'}
-                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData}/>}
+                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
                     modalWidth={'60%'}
                   />
                 </TableCell>

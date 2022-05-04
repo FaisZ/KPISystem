@@ -29,20 +29,23 @@ class Board extends React.Component {
             rows: [],
             index: 0
         };
+        var idString = 'bukti[]';
         if(this.props.buktiFisikData!=null){
-            var idString;
-            for (var i = 0; i <= 3; i++) {
-                idString = 'bukti[]';
-                this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+            for (var i = 0; i < this.props.buktiFisikData.length; i++) {
+                this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/></div>);
                 this.state.index++;
             }
+        }
+        else{
+            this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+            this.state.index++;
         }
         //console.log(this.state.selectedOption);
     }
     addBukties = () => {
         var newRow = [];
         var idString = 'bukti[]';
-            newRow.push(<div  key={this.state.index} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+        newRow.push(<div  key={this.state.index} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
         this.setState(prevState => ({
             rows: [...prevState.rows, newRow]
           }))
