@@ -38,6 +38,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-6 bg-white border-b border-gray-200">
                     <InputInForms hidden="true" name="id" value={selectedData.id}/>
+                    <InputInForms hidden="true" name="tahapan_id" value={selectedData.tahapan_id}/>
                       <div className="p-2">
                         Uraian
                         {/* Uraian */}

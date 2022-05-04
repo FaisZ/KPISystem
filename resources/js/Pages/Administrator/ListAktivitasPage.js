@@ -21,7 +21,7 @@ export default function ListAktivitasPage(props) {
         <Head title="Tambah Master Data Aktivitas" />
         <div className="col-8 p-6 bg-white">
           <div>
-            Errors: {props.allAktivitas[1].tahapan}
+            Errors: {props.errors}
           </div>
         </div>
 

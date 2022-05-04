@@ -67,7 +67,8 @@ class AdministratorController extends Controller
       catch (Throwable $e){
         $errors = 'Saving unsur failed with error: '.$e;
       }
-      return $this->_newAktivitasDefaultData($errors);
+      return redirect()->back()->with('errors', $errors);
+      // return $this->_newAktivitasDefaultData($errors);
     }
 
     public function listAktivitas(){
@@ -145,7 +146,8 @@ class AdministratorController extends Controller
         Tahapan::destroy($tahapan->id);
         $errors = 'Saving bukti failed with error: '.$e;
       }
-      return $this->_newAktivitasDefaultData($errors);
+      return redirect()->back()->with('errors', $errors);
+      // return $this->_newAktivitasDefaultData($errors);
     }
 
     public function updateAktivitas(Request $request){
@@ -163,16 +165,18 @@ class AdministratorController extends Controller
       catch (Throwable $e){
         $errors = 'Saving aktivitas failed with error: '.$e;
       }
-      // try {
-      //   $tahapan = new Tahapan;
-      //   $tahapan->kpi_activity_id = $activity->id;
-      //   $tahapan->description = $request->tahapan;
-      //   $tahapan->save();
-      // }
-      // catch (Throwable $e){
-      //   Aktivitas::destroy($activity->id);
-      //   $errors = 'Saving tahapan failed with error: '.$e;
-      // }
+      try {
+        $tahapan = Tahapan::find($request->tahapan_id);
+        if($tahapan==null){
+          $tahapan = new Tahapan;
+          $tahapan->kpi_activity_id = $activity->id;
+        }
+        $tahapan->description = $request->tahapan;
+        $tahapan->save();
+      }
+      catch (Throwable $e){
+        $errors = 'Saving tahapan failed with error: '.$e;
+      }
       // try {
       //   foreach($request->bukti as $buct){
       //     $bukti = new BuktiFisik;
@@ -187,7 +191,9 @@ class AdministratorController extends Controller
       //   Tahapan::destroy($tahapan->id);
       //   $errors = 'Saving bukti failed with error: '.$e;
       // }
-      return $this->_newAktivitasDefaultData($errors);
+      // return $this->_newAktivitasDefaultData($errors);
+      // return Redirect::route('users.index');
+      return redirect()->back()->with('errors', $errors);
     }
 
  }
