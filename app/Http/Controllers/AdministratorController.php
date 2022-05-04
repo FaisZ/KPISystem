@@ -73,6 +73,8 @@ class AdministratorController extends Controller
     public function listAktivitas(){
       $errors = '';
       try {
+        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+        $allRank = Rank::select('name AS label','id AS value')->get();
         $aktivitas = new Aktivitas();
         $allAktivitas = $aktivitas->getFullActivity();
         $buktiFisik = $aktivitas->getAllBukti();
@@ -81,7 +83,7 @@ class AdministratorController extends Controller
       catch (Throwable $e){
         $errors = 'Retrieving aktivitas failed with error: '.$e;
       }
-      return Inertia::render($this->folder.'ListAktivitas', ['allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
+      return Inertia::render($this->folder.'ListAktivitas', ['allUnsur' => $allUnsur, 'allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
     }
 
     public function listUsers(){

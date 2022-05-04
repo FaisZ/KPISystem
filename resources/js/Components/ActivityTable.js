@@ -14,7 +14,9 @@ import { styled } from '@material-ui/core'
 
 const ActivityTable = ({
   tableData,
-  buktiFisikData
+  buktiFisikData,
+  allUnsur,
+  allRank
 }) => {
   const columns = React.useMemo(
     () => [
@@ -43,7 +45,10 @@ const ActivityTable = ({
           // Use Cell to render an expander for each row.
           // We can use the getToggleRowExpandedProps prop-getter
           // to build the expander.
-          <>Klik Disini</>
+          // <>Klik Disini</>
+          <span {...row.getToggleRowExpandedProps()}>
+            <>Klik Disini</>
+          </span>
         ),
       },
       {
@@ -54,7 +59,10 @@ const ActivityTable = ({
           // Use Cell to render an expander for each row.
           // We can use the getToggleRowExpandedProps prop-getter
           // to build the expander.
-          <>Klik Disini</>
+          // <>Klik Disini</>
+          <span {...row.getToggleRowExpandedProps()}>
+            <>Klik Disini</>
+          </span>
         ),
       },
       // {
@@ -156,6 +164,8 @@ const ActivityTable = ({
         setData={setData}
         updateMyData={updateMyData}
         skipPageReset={skipPageReset}
+        allUnsur={allUnsur}
+        allRank={allRank}
         // We added this as a prop for our table component
         // Remember, this is not part of the React Table API,
         // it's merely a rendering option we created for

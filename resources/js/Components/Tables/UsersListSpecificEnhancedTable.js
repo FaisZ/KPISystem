@@ -13,6 +13,7 @@ import TablePaginationActions from './TablePaginationActions'
 import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import TableToolbar from './TableToolbar'
+import ReactModal from '../ReactModal'
 import {
   useGlobalFilter,
   usePagination,
@@ -20,6 +21,7 @@ import {
   useSortBy,
   useTable
 } from 'react-table'
+import Button from '../Button'
 
 const inputStyle = {
   padding: 0,
@@ -172,6 +174,8 @@ const UsersListSpecificEnhancedTable = ({
                   ) : null}
                 </TableCell>
               ))}
+                <TableCell> Edit </TableCell>
+                <TableCell> Hapus </TableCell>
             </TableRow>
           ))}
         </TableHead>
@@ -187,6 +191,8 @@ const UsersListSpecificEnhancedTable = ({
                     </TableCell>
                   )
                 })}
+                <TableCell> <ReactModal modalContent={<Button />} modalOpenText={'Edit'} modalTitle={'Edit Pengguna'}/> </TableCell>
+                <TableCell> <ReactModal modalOpenText={'Hapus'} modalTitle={'Hapus Pengguna'}/> </TableCell>
               </TableRow>
             )
           })}

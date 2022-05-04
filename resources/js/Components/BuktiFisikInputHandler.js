@@ -36,7 +36,7 @@ class Board extends React.Component {
         var idString;
         for (var i = 0; i <= this.state.index; i++) {
             idString = 'bukti[]';
-            rows.push(<div  key={i} className="p-2"><Input name={idString} /></div>);
+            rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
         }
         return rows;
     }
@@ -49,18 +49,18 @@ class Board extends React.Component {
 
         render() {
       return (
-        <div>
+        <>
             {this.state.rows}
-            <button
-                type={'button'}
-                className={
-                    `inline-flex items-center px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150`
-                }
-                onClick={this.handleChange}
-            >
-                Tambah Bukti
-            </button>
-        </div>
+            <div>
+                <Button
+                    style={{marginLeft:'10px', marginTop:'10px'}}
+                    type={'button'}
+                    onClick={this.handleChange}
+                >
+                    + Bukti
+                </Button>
+            </div>
+        </>
         );
     }
   }

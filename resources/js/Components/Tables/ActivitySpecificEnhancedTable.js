@@ -13,6 +13,8 @@ import TablePaginationActions from './TablePaginationActions'
 import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import TableToolbar from './TableToolbar'
+import ReactModal from '../ReactModal'
+import EditActivityForm from '../Forms/EditActivityForm'
 import {
   useGlobalFilter,
   usePagination,
@@ -107,6 +109,8 @@ const ActivitySpecificEnhancedTable = ({
   setData,
   updateMyData,
   skipPageReset,
+  allUnsur,
+  allRank
 }) => {
   const {
     getTableProps,
@@ -223,6 +227,8 @@ const ActivitySpecificEnhancedTable = ({
                   ) : null}
                 </TableCell>
               ))}
+                <TableCell>Edit</TableCell>
+                <TableCell>Hapus</TableCell>
             </TableRow>
           ))}
         </TableHead>
@@ -233,7 +239,9 @@ const ActivitySpecificEnhancedTable = ({
               // Use a React.Fragment here so the table markup is still valid
               // <React.Fragment {...row.getRowProps()}>
               <React.Fragment>
-                <TableRow {...row.getToggleRowExpandedProps()}>
+                {/* trigger the switch for the whole row => {...row.getToggleRowExpandedProps()} */}
+                {/* <TableRow {...row.getToggleRowExpandedProps()}> */}
+                <TableRow>
                   {row.cells.map(cell => {
                     return (
                       <TableCell {...cell.getCellProps()}>
@@ -241,6 +249,20 @@ const ActivitySpecificEnhancedTable = ({
                       </TableCell>
                     )
                   })}
+                <TableCell> 
+                  <ReactModal 
+                    modalOpenText={'Edit'} 
+                    modalTitle={'Edit Aktivitas'}
+                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank}/>}
+                    modalWidth={'60%'}
+                  /> 
+                </TableCell>
+                <TableCell> 
+                  <ReactModal 
+                    modalOpenText={'Hapus'} 
+                    modalTitle={'Hapus Aktivitas'}
+                  /> 
+                </TableCell>
                 </TableRow>
                 {row.isExpanded ? (
                   <tr>
