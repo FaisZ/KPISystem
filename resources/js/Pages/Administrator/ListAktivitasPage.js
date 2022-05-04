@@ -8,7 +8,7 @@ import ReactModal from '@/Components/ReactModal';
 import AddUnsurForm from '@/Components/Forms/AddUnsurForm';
 import AddActivityForm from '@/Components/Forms/AddActivityForm';
 
-export default function ListAktivitas(props) {
+export default function ListAktivitasPage(props) {
   const token = document.head.querySelector('meta[name="csrf-token"]').content;
 
   return (

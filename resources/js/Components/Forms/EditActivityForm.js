@@ -18,6 +18,7 @@ export default function EditActivityForm({
     allRank,
     selectedRow,
     selectedData,
+    buktiFisik
 }) {
 const token = document.head.querySelector('meta[name="csrf-token"]').content;
 
@@ -56,20 +57,20 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
                       </div>
                     </div>
                 </div>
-                {/* <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-6 bg-white border-b border-gray-200">
                     <Grid container>
                         <Grid item sm={6}> 
                           Tahapan
-                          <TahapanInput name="tahapan" />
+                          <TahapanInput defaultValue={selectedData.tahapan} name="tahapan" />
                         </Grid>
                         <Grid item sm={6}>
                           Bukti Fisik
-                          <BuktiFisikInputHandler />
+                          <BuktiFisikInputHandler buktiFisikData={buktiFisik} />
                         </Grid>
                     </Grid>
                     </div>
-                </div> */}
+                </div>
                 <div className="p-2">
                   <Button children='Perbarui' />
                 </div>

@@ -166,6 +166,7 @@ const ActivityTable = ({
         skipPageReset={skipPageReset}
         allUnsur={allUnsur}
         allRank={allRank}
+        buktiFisikData={buktiFisikData}
         // We added this as a prop for our table component
         // Remember, this is not part of the React Table API,
         // it's merely a rendering option we created for

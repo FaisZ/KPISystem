@@ -105,6 +105,7 @@ const defaultColumn = {
 const ActivitySpecificEnhancedTable = ({
   columns,
   data,
+  buktiFisikData,
   renderRowSubComponent,
   setData,
   updateMyData,
@@ -240,7 +241,7 @@ const ActivitySpecificEnhancedTable = ({
                   <ReactModal 
                     modalOpenText={'Edit'} 
                     modalTitle={'Edit Aktivitas'}
-                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row}/>}
+                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData}/>}
                     modalWidth={'60%'}
                   />
                 </TableCell>
