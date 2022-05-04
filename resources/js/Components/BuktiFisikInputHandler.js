@@ -7,6 +7,7 @@ import Button from './Button';
 export default function BuktiFisikInputHandler({
     type = 'text',
     name,
+    buktiFisikData = null,
     options,
     value,
     label,
@@ -17,7 +18,7 @@ export default function BuktiFisikInputHandler({
     handleChange,
 }) {
     return (
-        <Board options = {options} value={value} label={label} name={name}/>
+        <Board options = {options} value={value} label={label} name={name} buktiFisikData={buktiFisikData}/>
     );
 }
 
@@ -27,23 +28,29 @@ class Board extends React.Component {
         this.state = {
             rows: [],
             index: 0
-            
         };
+        if(this.props.buktiFisikData!=null){
+            var idString;
+            for (var i = 0; i <= 3; i++) {
+                idString = 'bukti[]';
+                this.state.rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+                this.state.index++;
+            }
+        }
         //console.log(this.state.selectedOption);
     }
     addBukties = () => {
-        var rows = [];
-        var idString;
-        for (var i = 0; i <= this.state.index; i++) {
-            idString = 'bukti[]';
-            rows.push(<div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
-        }
-        return rows;
+        var newRow = [];
+        var idString = 'bukti[]';
+            newRow.push(<div  key={this.state.index} style={{marginLeft:'10px',marginBottom:'2px'}}><Input name={idString} /></div>);
+        this.setState(prevState => ({
+            rows: [...prevState.rows, newRow]
+          }))
     }
 
     handleChange = () => {
         this.setState({index: this.state.index + 1})
-        this.setState({rows: this.addBukties()})
+        this.addBukties()
         //console.log(selectedOption.parent_id);
     }
 
