@@ -182,19 +182,6 @@ const ActivitySpecificEnhancedTable = ({
   const removeByIndexs = (array, indexs) =>
     array.filter((_, i) => !indexs.includes(i))
 
-  const deleteUserHandler = event => {
-    const newData = removeByIndexs(
-      data,
-      Object.keys(selectedRowIds).map(x => parseInt(x, 10))
-    )
-    setData(newData)
-  }
-
-  const addUserHandler = user => {
-    const newData = data.concat([user])
-    setData(newData)
-  }
-
   // Render the UI for your table
   return (
     <TableContainer>
@@ -253,9 +240,9 @@ const ActivitySpecificEnhancedTable = ({
                   <ReactModal 
                     modalOpenText={'Edit'} 
                     modalTitle={'Edit Aktivitas'}
-                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank}/>}
+                    modalContent={<EditActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row}/>}
                     modalWidth={'60%'}
-                  /> 
+                  />
                 </TableCell>
                 <TableCell> 
                   <ReactModal 

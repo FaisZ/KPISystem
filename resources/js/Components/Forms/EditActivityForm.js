@@ -10,41 +10,49 @@ import Select from 'react-select';
 import TahapanInput from '@/Components/TahapanInput';
 import BuktiFisikInputHandler from '@/Components/BuktiFisikInputHandler';
 import { Grid } from '@material-ui/core';
+import InputInForms from '../InputInForms';
+import EditAktivitasSelector from '../EditAktivitasSelector';
 
 export default function EditActivityForm({
     allUnsur,
     allRank,
-    selectedData
+    selectedRow,
+    selectedData,
 }) {
 const token = document.head.querySelector('meta[name="csrf-token"]').content;
 
+  function handleChange(e){
+  }
+  
   return (
     <Container maxWidth="lg">
-            <form method="POST" action="/administrator/add_aktivitas">
+            <form method="POST" action="/administrator/update_aktivitas">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                   <input type="hidden" name="_token" value={token} />
                     <div className="p-6 bg-white border-b border-gray-200">
-                      <AktivitasSelector options={allUnsur} value={9} label={'Pengembangan Pertanahan'} name={'kpi_group_id'}/>
+                      <EditAktivitasSelector options={allUnsur} defaultValue={{value: selectedData.unsur_id,label: selectedRow.cells[0].value}} name={'kpi_group_id'} activityName={selectedRow.cells[1].value}/>
                     </div>
                 </div>
             <div>
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-6 bg-white border-b border-gray-200">
+                    <InputInForms hidden="true" name="id" value={selectedData.id}/>
                       <div className="p-2">
                         Uraian
-                        <Input name="title" />
+                        {/* Uraian */}
+                        <InputInForms name="title" defaultValue={selectedRow.cells[1].value} handleChange={(value) => this.onChange(value)}/>
                       </div>
                       <div className="p-2">
                         Pelaksana
-                        <Select options={ allRank } /*defaultValue={this.state.selectedOption}*/  placeholder={'Pilih Pelaksana'} name={'rank_id'} />
+                        <Select options={ allRank } defaultValue={{value: selectedData.jabatan_id,label: selectedRow.cells[2].value}}  placeholder={'Pilih Pelaksana'} name={'rank_id'} />
                       </div>
                       <div className="p-2">
                         Angka Kredit
-                        <Input name="credit_value" type={'number'} />
+                        <InputInForms name="credit_value" type={'number'} defaultValue={selectedRow.cells[3].value} handleChange={handleChange()}/>
                       </div>
                       <div className="p-2">
                         Informasi Tambahan (Opsional)
-                        <Input name="description"/>
+                        <InputInForms name="description" handleChange={handleChange()}/>
                       </div>
                     </div>
                 </div>

@@ -3,13 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
-export default function AktivitasSelector({
+export default function EditAktivitasSelector({
     type = 'text',
     name,
     options,
     value,
     defaultValue,
     label,
+    activityName,
     className,
     autoComplete,
     required,
@@ -17,7 +18,7 @@ export default function AktivitasSelector({
     handleChange,
 }) {
     return (
-        <Board options = {options} value={value} label={label} name={name}/>
+        <Board options = {options} value={value} label={label} name={name} defaultValue={defaultValue} activityName={activityName}/>
     );
 }
 function getSctructure(options,currentId){
@@ -27,7 +28,7 @@ function getSctructure(options,currentId){
         var res = options.find(option => {
             return option.value === currentId;
           });
-        if(res.parent_id==null ||res.parent_id==0)
+        if( res!=null && (res.parent_id==null ||res.parent_id==0))
             return res.label;
         else
             return ''+getSctructure(options,res.parent_id)+' - '+res.label;
@@ -40,8 +41,8 @@ function getSctructure(options,currentId){
         this.state = {
             //use this when the selected can be chosen from the Select component
             //selectedOption: {label: this.props.label, value: this.props.value},
-            selectedOption: {label: 'Tidak Ada', value: null},
-            structure: getSctructure(this.props.options,null)
+            selectedOption: this.props.defaultValue,
+            structure: getSctructure(this.props.options,this.props.defaultValue.value)
         };
         //console.log(this.state.selectedOption);
     }
@@ -58,11 +59,11 @@ function getSctructure(options,currentId){
                 Visualisasi Struktur
             </div>
             <div className="p-6 bg-white border-b border-gray-200">
-                <p>{this.state.structure} - <b>Aktivitas Baru</b></p>
+                <p>{this.state.structure} - <b>{this.props.activityName}</b></p>
             </div>
             <div className="p-2">
                 Merupakan Bagian dari Unsur
-                <Select options={ this.props.options } /*defaultValue={this.state.selectedOption}*/  placeholder={'Tidak Ada'} onChange={this.handleChange} name={this.props.name} />
+                <Select options={ this.props.options } defaultValue={this.props.defaultValue}  placeholder={'Tidak Ada'} onChange={this.handleChange} name={this.props.name} />
             </div>
         </div>
         );
