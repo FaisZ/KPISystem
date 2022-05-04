@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\AdministratorController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +22,18 @@ Route::get('/pegawai', [PegawaiController::class, 'index']);
 Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
 Route::post('e/addPegawai', [PegawaiController::class, 'addPegawai']);
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//          'canLogin' => Route::has('login'),
+//         //'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
+Route::get('/register', [RegisteredUserController::class, 'create'])->middleware(['auth', 'verified'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store']);
+
 
 Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
@@ -42,7 +47,7 @@ Route::post('/administrator/add_unsur', [AdministratorController::class, 'addUns
 Route::get('/administrator/aktivitas', [AdministratorController::class, 'listAktivitas'])->middleware(['auth', 'verified'])->name('master_aktivitas');
 Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'newAktivitas'])->middleware(['auth', 'verified'])->name('add_aktivitas');
 Route::post('/administrator/add_aktivitas', [AdministratorController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('add_aktivitas');
-Route::get('/administrator/edit_aktivitas', [AdministratorController::class, 'editAktivitas'])->middleware(['auth', 'verified'])->name('edit_aktivitas');
+Route::post('/administrator/update_aktivitas', [AdministratorController::class, 'updateAktivitas'])->middleware(['auth', 'verified'])->name('update_aktivitas');
 
 Route::get('/administrator/users', [AdministratorController::class, 'listUsers'])->middleware(['auth', 'verified'])->name('master_users');
 
