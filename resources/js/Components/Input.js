@@ -10,7 +10,8 @@ export default function Input({
     isFocused,
     handleChange,
     defaultValue,
-    hidden
+    hidden,
+    multiple
 }) {
     const input = useRef();
 
@@ -23,6 +24,7 @@ export default function Input({
     return (
         <div className="flex flex-col items-start">
             <input
+                multiple={multiple}
                 hidden={hidden}
                 defaultValue={defaultValue}
                 type={type}

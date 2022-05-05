@@ -37,7 +37,7 @@ class Board extends React.Component {
                         {this.props.buktiFisikData[i].description}
                         <Input hidden="true" name={'bukti_id[]'} value={this.props.buktiFisikData[i].bukti_id}/>
                         {/* <Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/> */}
-                        <Input name={idString} type={'file'} />
+                        <Input name={idString} type={'file'}/>
                     </div>
                 );
                 this.state.index++;

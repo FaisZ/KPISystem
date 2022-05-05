@@ -15,6 +15,7 @@ use Auth;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Http\Redirector;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -53,7 +54,7 @@ class PegawaiController extends Controller
       $errors = '';
       try {
         $submission = new KPISubmission();
-        // $submission->user_id = 1;
+        $submission->user_id = Auth::id();
         $submission->kpi_activity_id = $request->id;
         $submission->status = 0;
         $submission->save();
@@ -63,12 +64,13 @@ class PegawaiController extends Controller
       }
       try {
         for($i=0; $i<count($request->bukti); $i++){
+
           $buktiSubmission = new BuktiFisikSubmission;
           $buktiSubmission->kpi_submission_id = $submission->id;
           $buktiSubmission->bukti_id = $request->bukti_id[$i];
-          // $buktiSubmission->file_location = 'location';
+          $storage = Storage::disk('local')->putFile('bukti_files', $request->file('bukti')[$i]);
+          $buktiSubmission->file_location = $storage;
           $buktiSubmission->save();
-          // Storage::
         }
       }
       catch (Exception $e){
