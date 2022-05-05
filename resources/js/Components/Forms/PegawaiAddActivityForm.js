@@ -30,9 +30,9 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
             <form method="POST" action="/administrator/update_aktivitas">
             <div>
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="p-6 bg-white border-b border-gray-200">
-                    <InputInForms hidden="true" name="id" value={selectedData.id}/>
-                    <InputInForms hidden="true" name="tahapan_id" value={selectedData.tahapan_id}/>
+                    <div className="p-2 bg-white border-b border-gray-200">
+                      <InputInForms hidden="true" name="id" value={selectedData.id}/>
+                      <InputInForms hidden="true" name="tahapan_id" value={selectedData.tahapan_id}/>
                       <div className="p-2">
                         <ShowAktivitasSelector options={allUnsur} defaultValue={{value: selectedData.unsur_id,label: selectedRow.cells[0].value}} name={'kpi_group_id'} activityName={selectedRow.cells[1].value}/>
                       </div>
@@ -48,16 +48,10 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
                         Informasi Tambahan
                         <div>Ini adalah contoh informasi tambahan</div>
                       </div>
-                    </div>
-                </div>
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="p-6 bg-white border-b border-gray-200">
-                    <Grid container>
-                        <Grid item sm={12}>
-                          Bukti Fisik
-                          <BuktiFisikUploader buktiFisikData={buktiFisik} />
-                        </Grid>
-                    </Grid>
+                      <div className="p-2">
+                        Bukti Fisik
+                        <BuktiFisikUploader buktiFisikData={buktiFisik} />
+                      </div>
                     </div>
                 </div>
                 <div className="p-2">

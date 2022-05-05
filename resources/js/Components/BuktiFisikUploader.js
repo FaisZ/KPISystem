@@ -33,9 +33,11 @@ class Board extends React.Component {
         if(this.props.buktiFisikData!=null){
             for (var i = 0; i < this.props.buktiFisikData.length; i++) {
                 this.state.rows.push(
-                    <div  key={i} style={{marginLeft:'10px',marginBottom:'2px'}}>
+                    <div className="p-1 bg-white border-t border-gray-300" key={i} style={{marginLeft:'10px',marginBottom:'2px'}}>
+                        {this.props.buktiFisikData[i].description}
                         <Input hidden="true" name={'bukti_id[]'} value={this.props.buktiFisikData[i].bukti_id}/>
-                        <Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/>
+                        {/* <Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/> */}
+                        <Input name={idString} type={'file'} />
                     </div>
                 );
                 this.state.index++;
