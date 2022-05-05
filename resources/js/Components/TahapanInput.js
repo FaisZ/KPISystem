@@ -9,7 +9,8 @@ export default function TahapanInput({
     required,
     isFocused,
     handleChange,
-    defaultValue
+    defaultValue,
+    readOnly
 }) {
     const input = useRef();
 
@@ -22,6 +23,7 @@ export default function TahapanInput({
     return (
         <div className="flex flex-col items-start">
             <textarea
+                readOnly={readOnly}
                 defaultValue={defaultValue}
                 type={type}
                 name={name}
