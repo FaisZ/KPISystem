@@ -9,6 +9,8 @@ use App\Models\Rank;
 use App\Models\Aktivitas;
 use App\Models\Tahapan;
 use App\Models\BuktiFisik;
+use App\Models\KPISubmission;
+use App\Models\BuktiFisikSubmission;
 use Auth; 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -46,6 +48,36 @@ class PegawaiController extends Controller
       return $this->_defaultDashboard('');
     }
 
+    public function addAktivitas(Request $request)
+    {
+      $errors = '';
+      try {
+        $submission = new KPISubmission();
+        // $submission->user_id = 1;
+        $submission->kpi_activity_id = $request->id;
+        $submission->status = 0;
+        $submission->save();
+      }
+      catch (Throwable $e){
+        $errors = 'Saving aktivitas failed with error: '.$e;
+      }
+      try {
+        for($i=0; $i<count($request->bukti); $i++){
+          $buktiSubmission = new BuktiFisikSubmission;
+          $buktiSubmission->kpi_submission_id = $submission->id;
+          $buktiSubmission->bukti_id = $request->bukti_id[$i];
+          // $buktiSubmission->file_location = 'location';
+          $buktiSubmission->save();
+          // Storage::
+        }
+      }
+      catch (Exception $e){
+        KPISubmission::destroy($submission->id);
+        $errors = 'Saving bukti failed with error: '.$e;
+      }
+      return redirect()->back()->with('errors', $errors);
+    }
+
     public function show($id)
     {
         return view('pegawai.pegawai_dashboard', [
@@ -53,12 +85,12 @@ class PegawaiController extends Controller
         ]);
     }
 
-    public function addActivity()
-    {
-        return view('pegawai.pegawai_add_new_activity', [
-          'user' => Auth::user()
-        ]);
-    }
+    // public function addActivity()
+    // {
+    //     return view('pegawai.pegawai_add_new_activity', [
+    //       'user' => Auth::user()
+    //     ]);
+    // }
 
     public function addPegawai(Request $request)
     {
