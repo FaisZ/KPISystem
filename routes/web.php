@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/pegawai', [PegawaiController::class, 'index'])->middleware(['auth', 'verified'])->name('pegawai');
+Route::get('/pegawai/aktivitas_baru', [PegawaiController::class, 'masterAktivitasIndex'])->middleware(['auth', 'verified'])->name('pegawai_new_activity');
 Route::post('/pegawai/add_aktivitas', [PegawaiController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_add');
 // Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
 // Route::post('e/addPegawai', [PegawaiController::class, 'addPegawai']);

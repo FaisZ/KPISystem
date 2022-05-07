@@ -28,7 +28,7 @@ class PegawaiController extends Controller
 
     private $folder = 'Pegawai/';
 
-     private function _defaultDashboard($errors){
+     private function _defaultMasterAktivitasDashboard($errors){
       $errors = '';
       try {
         $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
@@ -44,9 +44,33 @@ class PegawaiController extends Controller
       return Inertia::render($this->folder.'PegawaiAktivitasPage', ['allUnsur' => $allUnsur, 'allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
     }
 
+    private function _defaultStatusAktivitasDashboard($errors){
+      $errors = '';
+      try {
+        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+        $allRank = Rank::select('name AS label','id AS value')->get();
+        // $aktivitas = new Aktivitas();
+        // $allAktivitas = $aktivitas->getFullActivity();
+        // $buktiFisik = $aktivitas->getAllBukti();
+        //$rank = Aktivitas
+        $user = new User();
+        $allAktivitas = $user->getCurrentUserAllPersonalAktivitas();
+        $buktiFisik = $user->getCurrentUserAllPersonalBukti();
+      }
+      catch (Throwable $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e;
+      }
+      return Inertia::render($this->folder.'PegawaiStatusAktivitasPage', ['allUnsur' => $allUnsur, 'allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
+    }
+
     public function index()
     {
-      return $this->_defaultDashboard('');
+      return $this->_defaultStatusAktivitasDashboard('');
+    }
+
+    public function masterAktivitasIndex()
+    {
+      return $this->_defaultMasterAktivitasDashboard('');
     }
 
     public function addAktivitas(Request $request)
@@ -70,6 +94,7 @@ class PegawaiController extends Controller
           $buktiSubmission->bukti_id = $request->bukti_id[$i];
           $storage = Storage::disk('local')->putFile('bukti_files', $request->file('bukti')[$i]);
           $buktiSubmission->file_location = $storage;
+          $buktiSubmission->original_file_name = $request->bukti[$i]->getClientOriginalName();
           $buktiSubmission->save();
         }
       }
