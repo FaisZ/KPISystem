@@ -134,8 +134,12 @@ class User extends Authenticatable
         if($boss_id == null)
             return null;
         else{
-            return User::where('id','=',$boss_id);
+            return User::where('id','=',$boss_id)->get();
         }
+    }
+
+    public function getUnderling($user_id){
+        return User::where('boss_id','=',$user_id)->get();
     }
 
     public function getCurrentUserSelectedPersonalBukti($submitted_bukti_id)
