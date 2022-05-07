@@ -23,6 +23,7 @@ Route::post('/pegawai/download', [PegawaiController::class, 'downloadBukti'])->m
 Route::get('/pegawai/aktivitas_baru', [PegawaiController::class, 'masterAktivitasIndex'])->middleware(['auth', 'verified'])->name('pegawai_new_activity');
 Route::post('/pegawai/add_aktivitas', [PegawaiController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_add');
 Route::post('/pegawai/edit_aktivitas', [PegawaiController::class, 'editAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_edit_activity');
+Route::post('/pegawai/delete_aktivitas', [PegawaiController::class, 'deleteAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_delete_activity');
 // Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
 // Route::post('e/addPegawai', [PegawaiController::class, 'addPegawai']);
 

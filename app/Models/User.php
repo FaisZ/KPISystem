@@ -60,7 +60,7 @@ class User extends Authenticatable
         return DB::table('kpi_submission')
         ->select('kpi_submission.id','kpi_submission.updated_at',
             // 'submission_bukti_fisik.id as bukti_id','submission_bukti_fisik.file_location AS bukti_location',
-            'kpi_activity.id','kpi_activity.title AS aktivitas','kpi_activity.credit_value as angkaKredit',
+            'kpi_activity.id AS aktivitas_id','kpi_activity.title AS aktivitas','kpi_activity.credit_value as angkaKredit',
             'kpi_group.id as unsur_id','kpi_group.title as unsur',
             'rank.id AS jabatan_id','rank.name AS jabatan',
             'tahapan.id AS tahapan_id','tahapan.description AS tahapan',

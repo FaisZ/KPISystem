@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Input from '@/Components/Input';
 import Button from './Button';
+import { Grid } from '@material-ui/core';
 
 export default function BuktiFisikEditor({
     type = 'text',
@@ -37,20 +38,23 @@ class Board extends React.Component {
                     this.state.rows.push(
                         <div className="p-1 bg-white border-t border-gray-300" key={i} style={{marginLeft:'10px',marginBottom:'2px'}}>
                             {this.props.buktiFisikData[i].description}
+
                             <Input hidden="true" name={'bukti_id[]'} value={this.props.buktiFisikData[i].bukti_id}/>
                             {/* <Input name={idString} defaultValue={this.props.buktiFisikData[i].description}/> */}
                             <input type="hidden" name="submitted_bukti_id[]" value={this.props.buktiFisikData[i].submitted_bukti_id} />
-                            <form method="POST" action="/pegawai/download" enctype="multipart/form-data">
-                                <input type="hidden" name="_token" value={this.props.token} />
-                                <input type="hidden" name="individual_submitted_bukti_id" value={this.props.buktiFisikData[i].submitted_bukti_id} />
-                                <Button children={this.props.buktiFisikData[i].filename} />
-                            </form>
-                            <div className="p-1">
-                                Ganti file
-                            </div>
-                            <div>
-                                <Input name={idString} type={'file'}/>
-                            </div>
+                            <Grid container>
+                                <Grid item sm={8}> 
+                                <form method="POST" action="/pegawai/download" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" value={this.props.token} />
+                                    <input type="hidden" name="individual_submitted_bukti_id" value={this.props.buktiFisikData[i].submitted_bukti_id} />
+                                    <Button children={this.props.buktiFisikData[i].filename} />
+                                </form>
+                                </Grid>
+                                <Grid item sm={4}>
+                                    <Input name={idString} type={'file'}/>
+                                </Grid>
+                            </Grid>
+
                         </div>
                     );
                 else

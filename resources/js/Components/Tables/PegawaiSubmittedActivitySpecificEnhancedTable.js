@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import TableToolbar from './TableToolbar'
 import ReactModal from '../ReactModal'
+import Button from '../Button'
 import {
   useGlobalFilter,
   usePagination,
@@ -183,7 +184,8 @@ const PegawaiSubmittedActivitySpecificEnhancedTable = ({
   const removeByIndexs = (array, indexs) =>
     array.filter((_, i) => !indexs.includes(i))
 
-  // Render the UI for your table
+  const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    // Render the UI for your table
   return (
     <TableContainer>
       <TableToolbar
@@ -246,12 +248,19 @@ const PegawaiSubmittedActivitySpecificEnhancedTable = ({
                   />
                 </TableCell>
                 <TableCell> 
-                  <ReactModal 
+                  {/* <ReactModal 
                     modalOpenText={'Hapus'} 
                     modalTitle={'Hapus Pengajuan Aktivitas'}
                     // modalContent={<PegawaiEditSubmittedActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
                     modalWidth={'60%'}
-                  />
+                  /> */}
+                  <form method="POST" action="/pegawai/delete_aktivitas">
+                    <input type="hidden" name="_token" value={token} />
+                    <input hidden="true" name="id" value={data[row.index].id}/>
+                    <div className="p-2">
+                      <Button children='Hapus' />
+                    </div>
+                  </form>
                 </TableCell>
                 </TableRow>
                 {row.isExpanded ? (

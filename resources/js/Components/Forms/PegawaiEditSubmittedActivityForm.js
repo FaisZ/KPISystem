@@ -37,7 +37,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
                       <div className="p-2">
                         <ShowAktivitasSelector options={allUnsur} defaultValue={{value: selectedData.unsur_id,label: selectedRow.cells[0].value}} name={'kpi_group_id'} activityName={selectedRow.cells[0].value}/>
                       </div>
-                      <div className="p-2">
+                      {/* <div className="p-2">
                         Angka Kredit
                         <div>{selectedRow.cells[2].value}</div>
                       </div>
@@ -48,7 +48,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
                       <div className="p-2">
                         Informasi Tambahan
                         <div>Ini adalah contoh informasi tambahan</div>
-                      </div>
+                      </div> */}
                       <div className="p-2">
                         Bukti Fisik
                         <BuktiFisikEditor buktiFisikData={buktiFisik} />

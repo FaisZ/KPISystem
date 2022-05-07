@@ -135,6 +135,28 @@ class PegawaiController extends Controller
       return redirect()->back()->with('errors', $errors);
     }
 
+    public function deleteAktivitas(Request $request)
+    {
+      $errors = '';
+      try {
+        $buktiSubmission = BuktiFisikSubmission::where('kpi_submission_id',$request->id)->get();
+        for($i=0; $i<count($buktiSubmission); $i++){
+          error_log('BuktiFound');
+          Storage::delete($buktiSubmission[$i]->file_location);
+        }
+        error_log('AAA'.$request->id);
+        BuktiFisikSubmission::where('kpi_submission_id',$request->id)->delete();
+        error_log('BBBB');
+        KPISubmission::destroy($request->id);
+        error_log('CCCCCC');
+      }
+      catch (Exception $e){
+        error_log('CCCCCCaaa');
+        $errors = 'Edit bukti failed with error: '.$e;
+      }
+      return redirect()->back()->with('errors', $errors);
+    }
+
     public function downloadBukti(Request $request){
       $user = new User();
       $bukti = $user->getCurrentUserSelectedPersonalBukti($request->individual_submitted_bukti_id);
