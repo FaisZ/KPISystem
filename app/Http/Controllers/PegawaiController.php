@@ -80,7 +80,16 @@ class PegawaiController extends Controller
         $submission = new KPISubmission();
         $submission->user_id = Auth::id();
         $submission->kpi_activity_id = $request->id;
-        $submission->status = 0;
+
+        // WHEN kpi_submission.status = 0 THEN "Menunggu"
+        // WHEN kpi_submission.status = 1 THEN "Diterima"
+        // WHEN kpi_submission.status = 2 THEN "Ditolak"
+        $user = new User();
+        $user_boss = $user->getBoss(Auth::id());
+        if($user_boss == null)
+          $submission->status = 1;
+        else
+          $submission->status = 0;
         $submission->save();
       }
       catch (Throwable $e){

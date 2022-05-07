@@ -129,6 +129,15 @@ class User extends Authenticatable
         return $filteredBukti;
     }
 
+    public function getBoss($user_id){
+        $boss_id = User::select('boss_id')->where('id','=',$user_id)->first();
+        if($boss_id == null)
+            return null;
+        else{
+            return User::where('id','=',$boss_id);
+        }
+    }
+
     public function getCurrentUserSelectedPersonalBukti($submitted_bukti_id)
     {
         $res = BuktiFisikSubmission::// DB::table('submission_bukti_fisik')
