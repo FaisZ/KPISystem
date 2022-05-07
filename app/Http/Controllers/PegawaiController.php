@@ -105,6 +105,43 @@ class PegawaiController extends Controller
       return redirect()->back()->with('errors', $errors);
     }
 
+    public function editAktivitas(Request $request)
+    {
+      $errors = '';
+      try {
+        for($i=0; $i<count($request->bukti); $i++){
+
+          $buktiSubmission = BuktiFisikSubmission::find($request->submitted_bukti_id[$i]);
+          if($buktiSubmission != null){
+            Storage::delete($buktiSubmission->file_location);
+          }
+          //TODO: save new bukti uploads
+          // else{
+          //   $buktiSubmission = new BuktiFisikSubmission;
+          //   $buktiSubmission->kpi_submission_id = $submission->id;
+          //   $buktiSubmission->bukti_id = $request->bukti_id[$i];
+          // }
+          $storage = Storage::disk('local')->putFile('bukti_files', $request->file('bukti')[$i]);
+          $buktiSubmission->file_location = $storage;
+          $buktiSubmission->original_file_name = $request->bukti[$i]->getClientOriginalName();
+          $buktiSubmission->save();
+
+            return redirect()->back()->with('errors', $errors);
+        }
+      }
+      catch (Exception $e){
+        $errors = 'Edit bukti failed with error: '.$e;
+      }
+      return redirect()->back()->with('errors', $errors);
+    }
+
+    public function downloadBukti(Request $request){
+      $user = new User();
+      $bukti = $user->getCurrentUserSelectedPersonalBukti($request->individual_submitted_bukti_id);
+      error_log($bukti->file_location);
+      return Storage::download($bukti->file_location,$bukti->original_file_name);
+  }
+
     public function show($id)
     {
         return view('pegawai.pegawai_dashboard', [

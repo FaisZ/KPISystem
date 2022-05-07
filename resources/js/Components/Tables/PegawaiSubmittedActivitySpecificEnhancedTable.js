@@ -216,6 +216,7 @@ const PegawaiSubmittedActivitySpecificEnhancedTable = ({
                 </TableCell>
               ))}
                 <TableCell>Edit</TableCell>
+                <TableCell>Hapus</TableCell>
             </TableRow>
           ))}
         </TableHead>
@@ -241,6 +242,14 @@ const PegawaiSubmittedActivitySpecificEnhancedTable = ({
                     modalOpenText={'Edit'} 
                     modalTitle={'Edit Pengajuan Aktivitas'}
                     modalContent={<PegawaiEditSubmittedActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
+                    modalWidth={'60%'}
+                  />
+                </TableCell>
+                <TableCell> 
+                  <ReactModal 
+                    modalOpenText={'Hapus'} 
+                    modalTitle={'Hapus Pengajuan Aktivitas'}
+                    // modalContent={<PegawaiEditSubmittedActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
                     modalWidth={'60%'}
                   />
                 </TableCell>

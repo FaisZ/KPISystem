@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Aktivitas;
 use Auth; 
+use App\Models\BuktiFisikSubmission;
 
 class User extends Authenticatable
 {
@@ -88,16 +89,10 @@ class User extends Authenticatable
             'kpi_submission.id','kpi_submission.updated_at',
             'kpi_activity.id AS activity_id',
             'bukti_fisik.id AS bukti_id','bukti_fisik.description AS description',
-            'submission_bukti_fisik.bukti_id as submitted_bukti_id','submission_bukti_fisik.file_location AS bukti_location','submission_bukti_fisik.original_file_name AS filename'
+            'submission_bukti_fisik.id as submitted_bukti_id','submission_bukti_fisik.file_location AS bukti_location','submission_bukti_fisik.original_file_name AS filename'
             )
         ->leftJoin('kpi_activity','kpi_activity.id','=','kpi_submission.kpi_activity_id')
         ->leftJoin('bukti_fisik','kpi_activity.id','=','bukti_fisik.kpi_activity_id')
-        // ->leftJoin('submission_bukti_fisik',//'submission_bukti_fisik.kpi_submission_id','=','kpi_submission.id','and',
-        //     'submission_bukti_fisik.kpi_submission_id','=','kpi_submission.id',
-            // 'and',
-            // 'submission_bukti_fisik.bukti_id','=','bukti_fisik.id',
-            // )
-        // ->where('submission_bukti_fisik.bukti_id','=','bukti_fisik.id')
         ->leftJoin('submission_bukti_fisik', function($join){
             $join->on('submission_bukti_fisik.kpi_submission_id', '=', 'kpi_submission.id');
             $join->on('submission_bukti_fisik.bukti_id','=','bukti_fisik.id');
@@ -107,31 +102,42 @@ class User extends Authenticatable
         $filteredBukti = [];
         $activityCounter = 0;
         $buktiCounter = 0;
-        error_log('helloooo');
+        // error_log('helloooo');
         for($i=0; $i < count($allBukti); $i++){
-            error_log('submission id: '.$allBukti[$i]->id);
+            // error_log('submission id: '.$allBukti[$i]->id);
             //if its the same as before
             if($i==0 || ($allBukti[$i]->id == $allBukti[$i-1]->id)){
                 $filteredBukti[$activityCounter][$buktiCounter] = $allBukti[$i];
-                error_log('index: '.$activityCounter.','.$buktiCounter);
-                error_log('submitted bukti id: '.$allBukti[$i]->submitted_bukti_id);
-                error_log('bukti id: '.$allBukti[$i]->bukti_id);
-                error_log('bukti loc: '.$allBukti[$i]->bukti_location);
+                // error_log('index: '.$activityCounter.','.$buktiCounter);
+                // error_log('submitted bukti id: '.$allBukti[$i]->submitted_bukti_id);
+                // error_log('bukti id: '.$allBukti[$i]->bukti_id);
+                // error_log('bukti loc: '.$allBukti[$i]->bukti_location);
                 $buktiCounter++;
             }
             else{
                 $activityCounter++;
                 $buktiCounter = 0;
                 $filteredBukti[$activityCounter][$buktiCounter] = $allBukti[$i];
-                error_log('index: '.$activityCounter.','.$buktiCounter);
-                error_log('submitted bukti id: '.$allBukti[$i]->submitted_bukti_id);
-                error_log('bukti id: '.$allBukti[$i]->bukti_id);
-                error_log('bukti loc: '.$allBukti[$i]->bukti_location);
+                // error_log('index: '.$activityCounter.','.$buktiCounter);
+                // error_log('submitted bukti id: '.$allBukti[$i]->submitted_bukti_id);
+                // error_log('bukti id: '.$allBukti[$i]->bukti_id);
+                // error_log('bukti loc: '.$allBukti[$i]->bukti_location);
                 $buktiCounter++;
             }
         }
         // error_log(json_encode($filteredBukti));
         return $filteredBukti;
+    }
+
+    public function getCurrentUserSelectedPersonalBukti($submitted_bukti_id)
+    {
+        $res = BuktiFisikSubmission::// DB::table('submission_bukti_fisik')
+        select(
+            'submission_bukti_fisik.id','submission_bukti_fisik.file_location','submission_bukti_fisik.original_file_name'
+            )
+        ->where('submission_bukti_fisik.id','=',$submitted_bukti_id)
+        ->firstOrFail();
+        return $res;
     }
 
 }

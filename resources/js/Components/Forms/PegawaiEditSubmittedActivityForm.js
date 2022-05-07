@@ -27,7 +27,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
   
   return (
     <Container maxWidth="lg">
-            <form method="POST" action="/pegawai/add_aktivitas" enctype="multipart/form-data">
+            <form method="POST" action="/pegawai/edit_aktivitas" enctype="multipart/form-data">
             <div>
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-2 bg-white border-b border-gray-200">
