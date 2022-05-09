@@ -239,29 +239,29 @@ const PegawaiSubmittedActivitySpecificEnhancedTable = ({
                       </TableCell>
                     )
                   })}
-                <TableCell> 
-                  <ReactModal 
-                    modalOpenText={'Edit'} 
-                    modalTitle={'Edit Pengajuan Aktivitas'}
-                    modalContent={<PegawaiEditSubmittedActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
-                    modalWidth={'60%'}
-                  />
-                </TableCell>
-                <TableCell> 
-                  {/* <ReactModal 
-                    modalOpenText={'Hapus'} 
-                    modalTitle={'Hapus Pengajuan Aktivitas'}
-                    // modalContent={<PegawaiEditSubmittedActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
-                    modalWidth={'60%'}
-                  /> */}
-                  <form method="POST" action="/pegawai/delete_aktivitas">
-                    <input type="hidden" name="_token" value={token} />
-                    <input hidden="true" name="id" value={data[row.index].id}/>
-                    <div className="p-2">
-                      <Button children='Hapus' />
-                    </div>
-                  </form>
-                </TableCell>
+                  {
+                    (data[row.index].status=='Menunggu') ? (
+                      <>
+                        <TableCell> 
+                          <ReactModal 
+                            modalOpenText={'Edit'} 
+                            modalTitle={'Edit Pengajuan Aktivitas'}
+                            modalContent={<PegawaiEditSubmittedActivityForm allUnsur={allUnsur} allRank={allRank} selectedData={data[row.index]} selectedRow={row} buktiFisik={buktiFisikData[row.index]}/>}
+                            modalWidth={'60%'}
+                          />
+                        </TableCell>
+                        <TableCell> 
+                          <form method="POST" action="/pegawai/delete_aktivitas">
+                            <input type="hidden" name="_token" value={token} />
+                            <input hidden="true" name="id" value={data[row.index].id}/>
+                            <div className="p-2">
+                              <Button children='Hapus' />
+                            </div>
+                          </form>
+                        </TableCell>
+                      </>
+                      ) : (<><TableCell /><TableCell /></>)
+                  }
                 </TableRow>
                 {row.isExpanded ? (
                   <tr>
