@@ -55,8 +55,35 @@ class User extends Authenticatable
         ->get();
     }
 
+    public function getCurrentUserUnderlingAllPersonalAktivitas(){
+        $underlings = $this->getUnderling(Auth::id());
+        $result = [];
+        foreach($underlings as $underling){
+            $result = $this->getSelectedUserAllPersonalAktivitas($underling->id);
+        }
+        return $result;
+    }
+
+    public function getCurrentUserUnderlingAllPersonalBukti(){
+        $underlings = $this->getUnderling(Auth::id());
+        $result = [];
+        foreach($underlings as $underling){
+            $result = $this->getSelectedUserAllPersonalBukti($underling->id);
+        }
+        return $result;
+    }
+
     public function getCurrentUserAllPersonalAktivitas()
     {
+        return $this->getSelectedUserAllPersonalAktivitas(Auth::id());
+    }
+
+    public function getCurrentUserAllPersonalBukti()
+    {
+        return $this->getSelectedUserAllPersonalBukti(Auth::id());
+    }
+
+    public function getSelectedUserAllPersonalAktivitas($user_id){
         return DB::table('kpi_submission')
         ->select('kpi_submission.id','kpi_submission.updated_at',
             // 'submission_bukti_fisik.id as bukti_id','submission_bukti_fisik.file_location AS bukti_location',
@@ -64,6 +91,7 @@ class User extends Authenticatable
             'kpi_group.id as unsur_id','kpi_group.title as unsur',
             'rank.id AS jabatan_id','rank.name AS jabatan',
             'tahapan.id AS tahapan_id','tahapan.description AS tahapan',
+            'users.name AS namaPegawai',
             DB::raw('
             CASE 
                 WHEN kpi_submission.status = 0 THEN "Menunggu"
@@ -72,17 +100,18 @@ class User extends Authenticatable
             END AS status
             ')
             )
+        ->leftJoin('users','users.id','=','kpi_submission.user_id')
         ->leftJoin('kpi_activity','kpi_activity.id','=','kpi_submission.kpi_activity_id')
         // ->leftJoin('submission_bukti_fisik','submission_bukti_fisik.kpi_submission_id','=','kpi_submission.id')
         ->leftJoin('kpi_group','kpi_activity.kpi_group_id','=','kpi_group.id')
         ->leftJoin('rank','kpi_activity.rank_id','=','rank.id')
         ->leftJoin('tahapan','kpi_activity.id','=','tahapan.kpi_activity_id')
-        ->where('kpi_submission.user_id','=', Auth::id())
+        ->where('kpi_submission.user_id','=', $user_id)
         ->orderBy('kpi_submission.updated_at','desc')
         ->get();
     }
 
-    public function getCurrentUserAllPersonalBukti()
+    public function getSelectedUserAllPersonalBukti($user_id)
     {
         $allBukti = DB::table('kpi_submission')
         ->select(
@@ -97,6 +126,7 @@ class User extends Authenticatable
             $join->on('submission_bukti_fisik.kpi_submission_id', '=', 'kpi_submission.id');
             $join->on('submission_bukti_fisik.bukti_id','=','bukti_fisik.id');
         })
+        ->where('kpi_submission.user_id','=', $user_id)
         ->orderBy('kpi_submission.updated_at','desc')
         ->get();
         $filteredBukti = [];

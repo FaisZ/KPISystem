@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\AtasanController;
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
@@ -24,6 +25,11 @@ Route::get('/pegawai/aktivitas_baru', [PegawaiController::class, 'masterAktivita
 Route::post('/pegawai/add_aktivitas', [PegawaiController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_add');
 Route::post('/pegawai/edit_aktivitas', [PegawaiController::class, 'editAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_edit_activity');
 Route::post('/pegawai/delete_aktivitas', [PegawaiController::class, 'deleteAktivitas'])->middleware(['auth', 'verified'])->name('pegawai_delete_activity');
+
+Route::get('/atasan', [AtasanController::class, 'index'])->middleware(['auth', 'verified'])->name('atasan');
+Route::post('/atasan/setuju', [AtasanController::class, 'acceptAktivitas'])->middleware(['auth', 'verified']);
+Route::post('/atasan/tolak', [AtasanController::class, 'rejectAktivitas'])->middleware(['auth', 'verified']);
+
 // Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
 // Route::post('e/addPegawai', [PegawaiController::class, 'addPegawai']);
 
