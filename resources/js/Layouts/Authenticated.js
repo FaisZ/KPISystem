@@ -23,7 +23,33 @@ export default function Authenticated({ auth, header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
+                                    {/* Dashboard {auth.user.is_admin} */}
                                 </NavLink>
+                                <NavLink href={route('pegawai_new_activity')} active={route().current('pegawai_new_activity')}>
+                                    Pengajuan Baru
+                                </NavLink>
+                                <NavLink href={route('pegawai')} active={route().current('pegawai')}>
+                                    Pengajuan Pribadi
+                                </NavLink>
+                                {
+                                    (auth.user.is_admin==1) ? (<>
+                                        <NavLink href={route('atasan')} active={route().current('atasan')}>
+                                            Aktivitas Bawahan
+                                        </NavLink>
+                                    </>
+                                    ) : (<></>)
+                                }
+                                {
+                                    (auth.user.is_admin==1) ? (<>
+                                        <NavLink href={route('master_aktivitas')} active={route().current('master_aktivitas')}>
+                                            Master Aktivitas
+                                        </NavLink>
+                                        <NavLink href={route('master_users')} active={route().current('master_users')}>
+                                            Pengguna
+                                        </NavLink>
+                                    </>
+                                    ) : (<></>)
+                                }
                             </div>
                         </div>
 
