@@ -60,7 +60,7 @@ Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'new
 Route::post('/administrator/add_aktivitas', [AdministratorController::class, 'addAktivitas'])->middleware(['auth', 'verified'])->name('add_aktivitas');
 Route::post('/administrator/update_aktivitas', [AdministratorController::class, 'updateAktivitas'])->middleware(['auth', 'verified'])->name('update_aktivitas');
 
-Route::get('/administrator/users', [AdministratorController::class, 'listUsers'])->middleware(['auth', 'verified'])->name('master_users');
+Route::get('/administrator/pengguna', [AdministratorController::class, 'listUsers'])->middleware(['auth', 'verified'])->name('master_users');
 
 Route::get('/e', function () {
   return Inertia::render('Experiments', ['hello' => 'world']);

@@ -31,6 +31,7 @@ export default function InputInForms({
     return (
         <div className="flex flex-col items-start">
             <input
+            step={'any'}
             hidden={hidden}
                 defaultValue={defaultValue}
                 type={type}
