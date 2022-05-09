@@ -84,7 +84,6 @@ const EditableCell = ({
     </div>
   )
 }
-
 EditableCell.propTypes = {
   cell: PropTypes.shape({
     value: PropTypes.any.isRequired,
@@ -184,6 +183,7 @@ const AtasanViewSubmittedActivitySpecificEnhancedTable = ({
   const removeByIndexs = (array, indexs) =>
     array.filter((_, i) => !indexs.includes(i))
 
+  
   const token = document.head.querySelector('meta[name="csrf-token"]').content;
     // Render the UI for your table
   return (
@@ -248,24 +248,32 @@ const AtasanViewSubmittedActivitySpecificEnhancedTable = ({
                     modalWidth={'60%'}
                   />
                 </TableCell>
-                <TableCell> 
-                  <form method="POST" action="/atasan/setuju">
-                    <input type="hidden" name="_token" value={token} />
-                    <input hidden="true" name="id" value={data[row.index].id}/>
-                    <div className="p-2">
-                      <Button children='Setujui' />
-                    </div>
-                  </form>
-                </TableCell>
-                <TableCell> 
-                  <form method="POST" action="/atasan/tolak">
-                    <input type="hidden" name="_token" value={token} />
-                    <input hidden="true" name="id" value={data[row.index].id}/>
-                    <div className="p-2">
-                      <Button children='Tolak' />
-                    </div>
-                  </form>
-                </TableCell>
+                  <TableCell> 
+                    {
+                      (data[row.index].status!='Diterima') ? (
+                        <form method="POST" action="/atasan/setuju">
+                          <input type="hidden" name="_token" value={token} />
+                          <input hidden="true" name="id" value={data[row.index].id}/>
+                          <div className="p-2">
+                            <Button children='Setujui' />
+                          </div>
+                        </form>
+                        ) : (<></>)
+                    }
+                  </TableCell>
+                  <TableCell> 
+                  {
+                      (data[row.index].status!='Ditolak') ? (
+                        <form method="POST" action="/atasan/tolak">
+                          <input type="hidden" name="_token" value={token} />
+                          <input hidden="true" name="id" value={data[row.index].id}/>
+                          <div className="p-2">
+                            <Button children='Tolak' />
+                          </div>
+                        </form>
+                        ) : (<></>)
+                    }
+                  </TableCell>
                 </TableRow>
                 {row.isExpanded ? (
                   <tr>
