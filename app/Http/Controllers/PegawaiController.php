@@ -86,10 +86,15 @@ class PegawaiController extends Controller
         // WHEN kpi_submission.status = 2 THEN "Ditolak"
         $user = new User();
         $user_boss = $user->getBoss(Auth::id());
-        if($user_boss == null)
+        // error_log($user_boss);
+        if(count($user_boss) == 0){
+          // error_log('should Enter Here');
           $submission->status = 1;
-        else
+        }
+        else{
+          // error_log('Not Here');
           $submission->status = 0;
+        }
         $submission->save();
       }
       catch (Throwable $e){
@@ -150,17 +155,12 @@ class PegawaiController extends Controller
       try {
         $buktiSubmission = BuktiFisikSubmission::where('kpi_submission_id',$request->id)->get();
         for($i=0; $i<count($buktiSubmission); $i++){
-          error_log('BuktiFound');
           Storage::delete($buktiSubmission[$i]->file_location);
         }
-        error_log('AAA'.$request->id);
         BuktiFisikSubmission::where('kpi_submission_id',$request->id)->delete();
-        error_log('BBBB');
         KPISubmission::destroy($request->id);
-        error_log('CCCCCC');
       }
       catch (Exception $e){
-        error_log('CCCCCCaaa');
         $errors = 'Edit bukti failed with error: '.$e;
       }
       return redirect()->back()->with('errors', $errors);
@@ -169,7 +169,6 @@ class PegawaiController extends Controller
     public function downloadBukti(Request $request){
       $user = new User();
       $bukti = $user->getCurrentUserSelectedPersonalBukti($request->individual_submitted_bukti_id);
-      error_log($bukti->file_location);
       return Storage::download($bukti->file_location,$bukti->original_file_name);
   }
 

@@ -134,7 +134,10 @@ class User extends Authenticatable
         if($boss_id == null)
             return null;
         else{
-            return User::where('id','=',$boss_id)->get();
+            // error_log('boss_id: '.$boss_id->boss_id);
+            $ehe = User::where('id',$boss_id->boss_id)->get();
+            // error_log('ehe: '.$ehe);
+            return $ehe;
         }
     }
 
