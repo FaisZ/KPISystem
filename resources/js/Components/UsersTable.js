@@ -25,6 +25,10 @@ const UsersTable = ({
         Header: 'Atasan',
         accessor: 'atasan',
       },
+      {
+        Header: 'Akun',
+        accessor: 'accountType',
+      },
     ],
     []
   )

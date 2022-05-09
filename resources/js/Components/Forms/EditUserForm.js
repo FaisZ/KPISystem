@@ -19,6 +19,10 @@ export default function EditUserForm({
     allUsers
 }) {
 const token = document.head.querySelector('meta[name="csrf-token"]').content;
+const userType = [
+  {label: 'Pengguna', value: 0},
+  {label: 'Administrator', value: 1}
+]
   function getBossData(){
     var bossList = [];
     for(var i = 0; i<allUsers.length;i++){
@@ -30,6 +34,12 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
     return bossList;
   }
   
+  function getIsAdmin(){
+    if(selectedData.is_admin!=null)
+      return selectedData.is_admin;
+    else
+      return 0;
+  }
   return (
     <Container maxWidth="lg">
             <form method="POST" action="/administrator/update_user">
@@ -55,6 +65,10 @@ const token = document.head.querySelector('meta[name="csrf-token"]').content;
                       <div className="p-2">
                         Atasan
                         <Select options={ getBossData() } defaultValue={{value: selectedData.atasan_id,label: selectedData.atasan}}  placeholder={'Pilih Atasan'} name={'boss_id'} />
+                      </div>
+                      <div className="p-2">
+                        Jenis Akun
+                        <Select options={ userType } defaultValue={{value: getIsAdmin(),label: userType[getIsAdmin()].label}} placeholder={'Jenis Akun'} name={'is_admin'} />
                       </div>
                     </div>
                 </div>

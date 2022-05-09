@@ -96,6 +96,7 @@ class AdministratorController extends Controller
         $user->email = $request->email;
         $user->rank_id = $request->rank_id;
         $user->boss_id = $request->boss_id;
+        $user->is_admin = $request->is_admin;
         $user->save();
       }
       catch (Throwable $e){
