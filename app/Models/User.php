@@ -49,8 +49,8 @@ class User extends Authenticatable
     public function getAllUsers()
     {
         return DB::table('users')
-        ->select('users.name AS nama','users.email','bosses.name AS atasan','rank.name AS jabatan')
-        ->leftJoin('users AS bosses','bosses.id','=','users.boss_id')
+        ->select('users.id','users.name AS nama','users.email','boss.id AS atasan_id','boss.name AS atasan','rank.name AS jabatan', 'rank.id AS jabatan_id')
+        ->leftJoin('users AS boss','boss.id','=','users.boss_id')
         ->leftJoin('rank','rank.id','=','users.rank_id')
         ->get();
     }

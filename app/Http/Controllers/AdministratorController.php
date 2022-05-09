@@ -80,11 +80,28 @@ class AdministratorController extends Controller
       try {
         $users = new User();
         $allUsers = $users->getAllUsers();
+        $allRank = Rank::select('name AS label','id AS value')->get();
       }
       catch (Throwable $e){
         $errors = 'Retrieving users failed with error: '.$e;
       }
-      return Inertia::render($this->folder.'ListUsers', ['allUsers' => $allUsers, 'errors' => $errors]);
+      return Inertia::render($this->folder.'ListUsers', ['allUsers' => $allUsers, 'allRank' => $allRank, 'errors' => $errors]);
+    }
+
+    public function updateUser(Request $request){
+      $errors = '';
+      try {
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->rank_id = $request->rank_id;
+        $user->boss_id = $request->boss_id;
+        $user->save();
+      }
+      catch (Throwable $e){
+        $errors = 'Update user failed with error: '.$e;
+      }
+      return redirect()->back()->with('errors', $errors);
     }
 
     private function _newAktivitasDefaultData($errors){

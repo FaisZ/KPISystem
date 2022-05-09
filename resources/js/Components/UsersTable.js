@@ -4,7 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import UsersListSpecificEnhancedTable from './Tables/UsersListSpecificEnhancedTable'
 
 const UsersTable = ({
-  tableData
+  tableData,
+  rankData
 }) => {
   const columns = React.useMemo(
     () => [
@@ -63,6 +64,7 @@ const UsersTable = ({
         setData={setData}
         updateMyData={updateMyData}
         skipPageReset={skipPageReset}
+        rankData={rankData}
       />
     </div>
   )

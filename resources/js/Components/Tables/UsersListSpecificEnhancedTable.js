@@ -22,6 +22,7 @@ import {
   useTable
 } from 'react-table'
 import Button from '../Button'
+import EditUserForm from '../Forms/EditUserForm'
 
 const inputStyle = {
   padding: 0,
@@ -90,6 +91,7 @@ const UsersListSpecificEnhancedTable = ({
   setData,
   updateMyData,
   skipPageReset,
+  rankData,
 }) => {
   const {
     getTableProps,
@@ -191,7 +193,7 @@ const UsersListSpecificEnhancedTable = ({
                     </TableCell>
                   )
                 })}
-                <TableCell> <ReactModal modalContent={<Button />} modalOpenText={'Edit'} modalTitle={'Edit Pengguna'}/> </TableCell>
+                <TableCell> <ReactModal modalContent={<EditUserForm allRank={rankData} selectedData={data[row.index]} allUsers={data}/>} modalWidth={'50%'} modalOpenText={'Edit'} modalTitle={'Edit Pengguna'}/> </TableCell>
                 <TableCell> <ReactModal modalOpenText={'Hapus'} modalTitle={'Hapus Pengguna'}/> </TableCell>
               </TableRow>
             )
