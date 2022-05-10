@@ -32,7 +32,7 @@ export default function Authenticated({ auth, header, children }) {
                                     Pengajuan Pribadi
                                 </NavLink>
                                 {
-                                    (auth.user.is_admin==1) ? (<>
+                                    (auth.user.has_underling==1) ? (<>
                                         <NavLink href={route('atasan')} active={route().current('atasan')}>
                                             Aktivitas Bawahan
                                         </NavLink>

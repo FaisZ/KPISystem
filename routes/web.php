@@ -50,11 +50,11 @@ Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/administrator/add_unsur', [AdministratorController::class, 'newUnsur'])->middleware(['auth', 'admin'])->name('add_unsur');
+// Route::get('/administrator/add_unsur', [AdministratorController::class, 'newUnsur'])->middleware(['auth', 'admin'])->name('add_unsur');
 Route::post('/administrator/add_unsur', [AdministratorController::class, 'addUnsur'])->middleware(['auth', 'admin'])->name('add_unsur');
 
 Route::get('/administrator/aktivitas', [AdministratorController::class, 'listAktivitas'])->middleware(['auth', 'admin'])->name('master_aktivitas');
-Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'newAktivitas'])->middleware(['auth', 'admin'])->name('add_aktivitas');
+// Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'newAktivitas'])->middleware(['auth', 'admin'])->name('add_aktivitas');
 Route::post('/administrator/add_aktivitas', [AdministratorController::class, 'addAktivitas'])->middleware(['auth', 'admin'])->name('add_aktivitas');
 Route::post('/administrator/update_aktivitas', [AdministratorController::class, 'updateAktivitas'])->middleware(['auth', 'admin'])->name('update_aktivitas');
 

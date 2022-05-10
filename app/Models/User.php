@@ -46,17 +46,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['has_underling'];
+    protected $appends = [
+        'has_underling'
+    ];
     public function getHasUnderlingAttribute()
     {
-        $user = Auth::user();
-
-        $authorized_users = [
-            'admin@test.com'
-        ];
-
-        return 'tessst';
+        $tok;
+        (count($this->getUnderling(Auth::id()))>0) ? ($tok = 1) : ($tok = 0);
+        return $tok;
     }
+
     public function getAllUsers()
     {
         return DB::table('users')
