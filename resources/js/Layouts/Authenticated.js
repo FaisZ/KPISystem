@@ -5,7 +5,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
 
-export default function Authenticated({ auth, header, children }) {
+export default function Authenticated({ auth, header, children, errors }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -24,7 +24,13 @@ export default function Authenticated({ auth, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                    Dashboard 
+                                    {
+                                        (Object.keys(errors).length>0 && errors!='') ? (
+                                            //draw flash message here
+                                            errors
+                                        ) : (<></>)
+                                    }
                                     {/* Dashboard {auth.user.is_admin} */}
                                 </NavLink>
                                 <NavLink href={route('pegawai_new_activity')} active={route().current('pegawai_new_activity')}>
