@@ -33,14 +33,14 @@ Route::post('/atasan/tolak', [AtasanController::class, 'rejectAktivitas'])->midd
 // Route::get('/pegawai/add', [PegawaiController::class, 'addActivity']);
 // Route::post('e/addPegawai', [PegawaiController::class, 'addPegawai']);
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//          'canLogin' => Route::has('login'),
-//         //'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome', [
+         'canLogin' => Route::has('login'),
+        //'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware(['auth', 'verified'])->name('register');
 Route::post('register', [RegisteredUserController::class, 'store']);

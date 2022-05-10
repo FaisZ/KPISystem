@@ -46,32 +46,32 @@ export default function Authenticated({ auth, header, children, errors }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-            {
-                (Object.keys(errors).length>0 && errors!='') ? (
-                    <FlashMessage duration={5000}>
-                        <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                            timeout: 500,
-                        }}
-                        >
-                        <Fade in={open}>
-                            <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    Errors
-                                </Typography>
-                                <>{errors}</>
-                            </Box>
-                        </Fade>
-                        </Modal>
-                    </FlashMessage>
-                ) : (<></>)
-            }
+                                {
+                                    (Object.keys(errors).length>0 && errors!='') ? (
+                                        <FlashMessage duration={5000}>
+                                            <Modal
+                                            open={open}
+                                            onClose={handleClose}
+                                            aria-labelledby="transition-modal-title"
+                                            aria-describedby="transition-modal-description"
+                                            closeAfterTransition
+                                            BackdropComponent={Backdrop}
+                                            BackdropProps={{
+                                                timeout: 500,
+                                            }}
+                                            >
+                                            <Fade in={open}>
+                                                <Box sx={style}>
+                                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                                        Errors
+                                                    </Typography>
+                                                    <>{errors}</>
+                                                </Box>
+                                            </Fade>
+                                            </Modal>
+                                        </FlashMessage>
+                                    ) : (<></>)
+                                }
 
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard 
