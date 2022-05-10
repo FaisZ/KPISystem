@@ -109,9 +109,11 @@ class PegawaiController extends Controller
       }
       catch (\Throwable $e){
         $errors = 'Saving aktivitas failed with error: '.$e->getMessage();
+        return redirect()->back()->with('errors', $errors);
       }
       catch (\Exception $e){
         $errors = 'Saving aktivitas failed with error: '.$e->getMessage();
+        return redirect()->back()->with('errors', $errors);
       }
       try {
         for($i=0; $i<count($request->bukti); $i++){
