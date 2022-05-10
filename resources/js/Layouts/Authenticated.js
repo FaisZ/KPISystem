@@ -5,13 +5,11 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
 import FlashMessage from 'react-flash-message';
-import ReactModal from '@/Components/ReactModal';
 import { Modal } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Fade } from "@material-ui/core";
 import { Backdrop } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
 
 
 export default function Authenticated({ auth, header, children, errors }) {
@@ -95,10 +93,13 @@ export default function Authenticated({ auth, header, children, errors }) {
                                 {
                                     (auth.user.is_admin==1) ? (<>
                                         <NavLink href={route('master_aktivitas')} active={route().current('master_aktivitas')}>
-                                            Master Aktivitas
+                                            Kelola Aktivitas
                                         </NavLink>
                                         <NavLink href={route('master_users')} active={route().current('master_users')}>
-                                            Pengguna
+                                            Kelola Pengguna
+                                        </NavLink>
+                                        <NavLink href={route('register')} active={route().current('register')}>
+                                            Daftarkan Pengguna
                                         </NavLink>
                                     </>
                                     ) : (<></>)

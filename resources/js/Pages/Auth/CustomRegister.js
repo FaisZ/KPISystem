@@ -5,8 +5,9 @@ import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import Authenticated from '@/Layouts/Authenticated';
 
-export default function CustomRegister() {
+export default function CustomRegister(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -31,8 +32,13 @@ export default function CustomRegister() {
     };
 
     return (
-        <Guest>
-            <Head title="Register" />
+        <Authenticated
+        auth={props.auth}
+        errors={props.errors}
+        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Daftarkan Pengguna Baru</h2>}
+      >
+    <Guest>
+              <Head title="Register" />
 
             <ValidationErrors errors={errors} />
 
@@ -101,5 +107,6 @@ export default function CustomRegister() {
                 </div>
             </form>
         </Guest>
+        </Authenticated>
     );
 }
