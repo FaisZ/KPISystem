@@ -4,10 +4,34 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
+import FlashMessage from 'react-flash-message';
+import ReactModal from '@/Components/ReactModal';
+import { Modal } from "@material-ui/core";
+import { Box } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { Fade } from "@material-ui/core";
+import { Backdrop } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+
 
 export default function Authenticated({ auth, header, children, errors }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
+     const [open, setOpen] = React.useState(true);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
+    const style = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4
+    };
+    
+  
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
@@ -23,15 +47,36 @@ export default function Authenticated({ auth, header, children, errors }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
+            {
+                (Object.keys(errors).length>0 && errors!='') ? (
+                    <FlashMessage duration={5000}>
+                        <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                        >
+                        <Fade in={open}>
+                            <Box sx={style}>
+                                <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    Errors
+                                </Typography>
+                                <>{errors}</>
+                            </Box>
+                        </Fade>
+                        </Modal>
+                    </FlashMessage>
+                ) : (<></>)
+            }
+
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard 
-                                    {
-                                        (Object.keys(errors).length>0 && errors!='') ? (
-                                            //draw flash message here
-                                            errors
-                                        ) : (<></>)
-                                    }
-                                    {/* Dashboard {auth.user.is_admin} */}
                                 </NavLink>
                                 <NavLink href={route('pegawai_new_activity')} active={route().current('pegawai_new_activity')}>
                                     Pengajuan Baru

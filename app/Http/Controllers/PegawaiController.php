@@ -54,7 +54,7 @@ class PegawaiController extends Controller
       $allAktivitas = [];
       $buktiFisik = [];
       try {
-        $allUnsur = Unsurs::select('title AS label','id AS value','parent_id','level')->get();
+        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
         $allRank = Rank::select('name AS label','id AS value')->get();
         // $aktivitas = new Aktivitas();
         // $allAktivitas = $aktivitas->getFullActivity();
