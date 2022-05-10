@@ -15,11 +15,6 @@ export default function PegawaiAktivitasPage(props) {
     >
       <div>
         <Head title="Tambah Master Data Aktivitas" />
-        <div className="col-8 p-6 bg-white">
-          <div>
-            Errors: {props.errors}
-          </div>
-        </div>
 
         <div className="py-12">
           {/* <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
