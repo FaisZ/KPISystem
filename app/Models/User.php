@@ -47,13 +47,19 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'has_underling'
+        'has_underling',
+        'total_score'
     ];
     public function getHasUnderlingAttribute()
     {
         $tok;
         (count($this->getUnderling(Auth::id()))>0) ? ($tok = 1) : ($tok = 0);
         return $tok;
+    }
+
+    public function getTotalScoreAttribute()
+    {
+        return $this->getSelectedUserKPIScore(Auth::id());
     }
 
     public function getAllUsers()
@@ -260,6 +266,17 @@ class User extends Authenticatable
         return $filteredBukti;
     }
 
+    public function getSelectedUserKPIScore($user_id){
+        return DB::table('kpi_submission')
+        ->select(
+            'kpi_activity.id AS aktivitas_id','kpi_activity.title AS aktivitas','kpi_activity.credit_value as angkaKredit',
+            )
+        ->leftJoin('kpi_activity','kpi_activity.id','=','kpi_submission.kpi_activity_id')
+        ->where('kpi_submission.user_id','=', $user_id)
+        ->where('kpi_submission.status','=', 1)
+        ->orderBy('kpi_submission.updated_at','desc')
+        ->sum('kpi_activity.credit_value');
+    }
     public function getBoss($user_id){
         $boss_id = User::select('boss_id')->where('id','=',$user_id)->first();
         if($boss_id == null)

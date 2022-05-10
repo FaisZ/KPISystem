@@ -25,6 +25,8 @@ import {
 } from 'react-table'
 import AtasanViewSubmittedActivityForm from '../Forms/AtasanViewSubmittedActivityForm'
 
+const token = document.head.querySelector('meta[name="csrf-token"]').content;
+
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = React.useRef()

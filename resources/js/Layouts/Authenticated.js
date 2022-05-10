@@ -54,6 +54,9 @@ export default function Authenticated({ auth, header, children }) {
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
+                            <div className="ml-3 relative text-sm leading-4 font-medium text-gray-500 bg-white">
+                                Skor: {auth.user.total_score}
+                            </div>
                             <div className="ml-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
