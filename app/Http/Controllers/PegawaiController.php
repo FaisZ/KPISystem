@@ -38,16 +38,23 @@ class PegawaiController extends Controller
         $buktiFisik = $aktivitas->getAllBukti();
         //$rank = Aktivitas
       }
-      catch (Throwable $e){
-        $errors = 'Retrieving aktivitas failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e->getMessage();
       }
       return Inertia::render($this->folder.'PegawaiAktivitasPage', ['allUnsur' => $allUnsur, 'allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
     }
 
     private function _defaultStatusAktivitasDashboard($errors){
       $errors = '';
+      $allUnsur = [];
+      $allRank = [];
+      $allAktivitas = [];
+      $buktiFisik = [];
       try {
-        $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
+        $allUnsur = Unsurs::select('title AS label','id AS value','parent_id','level')->get();
         $allRank = Rank::select('name AS label','id AS value')->get();
         // $aktivitas = new Aktivitas();
         // $allAktivitas = $aktivitas->getFullActivity();
@@ -57,8 +64,11 @@ class PegawaiController extends Controller
         $allAktivitas = $user->getCurrentUserAllPersonalAktivitas();
         $buktiFisik = $user->getCurrentUserAllPersonalBukti();
       }
-      catch (Throwable $e){
-        $errors = 'Retrieving aktivitas failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e->getMessage();
       }
       return Inertia::render($this->folder.'PegawaiStatusAktivitasPage', ['allUnsur' => $allUnsur, 'allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
     }
@@ -97,8 +107,11 @@ class PegawaiController extends Controller
         }
         $submission->save();
       }
-      catch (Throwable $e){
-        $errors = 'Saving aktivitas failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Saving aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Saving aktivitas failed with error: '.$e->getMessage();
       }
       try {
         for($i=0; $i<count($request->bukti); $i++){
@@ -112,9 +125,11 @@ class PegawaiController extends Controller
           $buktiSubmission->save();
         }
       }
-      catch (Exception $e){
-        KPISubmission::destroy($submission->id);
-        $errors = 'Saving bukti failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Saving bukti failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Saving bukti failed with error: '.$e->getMessage();
       }
       return redirect()->back()->with('errors', $errors);
     }
@@ -139,12 +154,13 @@ class PegawaiController extends Controller
           $buktiSubmission->file_location = $storage;
           $buktiSubmission->original_file_name = $request->bukti[$i]->getClientOriginalName();
           $buktiSubmission->save();
-
-            return redirect()->back()->with('errors', $errors);
         }
       }
-      catch (Exception $e){
-        $errors = 'Edit bukti failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Edit bukti failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Edit bukti failed with error: '.$e->getMessage();
       }
       return redirect()->back()->with('errors', $errors);
     }
@@ -160,8 +176,11 @@ class PegawaiController extends Controller
         BuktiFisikSubmission::where('kpi_submission_id',$request->id)->delete();
         KPISubmission::destroy($request->id);
       }
-      catch (Exception $e){
-        $errors = 'Edit bukti failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Delete aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Delete aktivitas failed with error: '.$e->getMessage();
       }
       return redirect()->back()->with('errors', $errors);
     }
@@ -172,30 +191,4 @@ class PegawaiController extends Controller
       return Storage::download($bukti->file_location,$bukti->original_file_name);
   }
 
-    public function show($id)
-    {
-        return view('pegawai.pegawai_dashboard', [
-            'user' => User::findOrFail($id)
-        ]);
-    }
-
-    // public function addActivity()
-    // {
-    //     return view('pegawai.pegawai_add_new_activity', [
-    //       'user' => Auth::user()
-    //     ]);
-    // }
-
-    public function addPegawai(Request $request)
-    {
-      $save = new User;
-      $save->name = $request->name;
-      $save->email = $request->email;
-      $save->password = $request->password;
-
-      $save->save();
-      return Inertia::render('Experiments', ['status' => 'success']);
-      //return redirect()->back()->with('status', 'User added');   
-      
-    }
 }
