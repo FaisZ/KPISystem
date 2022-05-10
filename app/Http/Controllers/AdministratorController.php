@@ -29,22 +29,6 @@ class AdministratorController extends Controller
       return $this->_newAktivitasDefaultData('');
     }
 
-    // private function _newUnsurDefaultData($errors){
-    //   try {
-    //     //get all unsur, but convert to usable array in the js here
-    //     $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
-    //   }
-    //   catch (Throwable $e){
-    //     $errors = 'Retrieving unsur failed with error: '.$e;
-    //   }
-    //   return Inertia::render($this->folder.'AddUnsur', ['selected' => '1', 'allUnsur' => $allUnsur, 'errors' => $errors]);
-    // }
-
-    // public function newUnsur()
-    // {
-    //   return $this->_newAktivitasDefaultData($errors);
-    // }
-
     public function addUnsur(Request $request){
       $errors = '';
       try {
@@ -64,11 +48,13 @@ class AdministratorController extends Controller
         $save->level = $level;
         $save->save();
       }
-      catch (Throwable $e){
-        $errors = 'Saving unsur failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Saving unsur failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Saving unsur failed with error: '.$e->getMessage();
       }
       return redirect()->back()->with('errors', $errors);
-      // return $this->_newAktivitasDefaultData($errors);
     }
 
     public function listAktivitas(){
@@ -82,8 +68,11 @@ class AdministratorController extends Controller
         $allUsers = $users->getAllUsers();
         $allRank = Rank::select('name AS label','id AS value')->get();
       }
-      catch (Throwable $e){
-        $errors = 'Retrieving users failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Retrieving users failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Retrieving users failed with error: '.$e->getMessage();
       }
       return Inertia::render($this->folder.'ListUsers', ['allUsers' => $allUsers, 'allRank' => $allRank, 'errors' => $errors]);
     }
@@ -99,8 +88,11 @@ class AdministratorController extends Controller
         $user->is_admin = $request->is_admin;
         $user->save();
       }
-      catch (Throwable $e){
-        $errors = 'Update user failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Update user failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Update user failed with error: '.$e->getMessage();
       }
       return redirect()->back()->with('errors', $errors);
     }
@@ -115,8 +107,11 @@ class AdministratorController extends Controller
         $buktiFisik = $aktivitas->getAllBukti();
         //$rank = Aktivitas
       }
-      catch (Throwable $e){
-        $errors = 'Retrieving aktivitas failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Retrieving aktivitas failed with error: '.$e->getMessage();
       }
       return Inertia::render($this->folder.'ListAktivitasPage', ['allUnsur' => $allUnsur, 'allRank' => $allRank, 'allAktivitas' => $allAktivitas, 'allBukti' => $buktiFisik, 'errors' => $errors]);
     }
@@ -137,8 +132,11 @@ class AdministratorController extends Controller
         $activity->has_file = true;
         $activity->save();
       }
-      catch (Throwable $e){
-        $errors = 'Saving aktivitas failed with error: '.$e;
+      catch (\Throwable $e){
+        $errors = 'Saving aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Saving aktivitas failed with error: '.$e->getMessage();
       }
       try {
         $tahapan = new Tahapan;
