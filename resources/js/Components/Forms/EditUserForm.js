@@ -49,13 +49,11 @@ const userType = [
                     <div className="p-6 bg-white border-b border-gray-200">
                     <InputInForms hidden="true" name="id" value={selectedData.id}/>
                       <div className="p-2">
-                        Nama Lengkap
-                        {/* Uraian */}
+                        Nama Lengkap 
                         <InputInForms name="name" defaultValue={selectedData.nama} handleChange={(value) => this.onChange(value)}/>
                       </div>
                       <div className="p-2">
                         Email
-                        {/* Uraian */}
                         <InputInForms name="email" type="email" defaultValue={selectedData.email} handleChange={(value) => this.onChange(value)}/>
                       </div>
                       <div className="p-2">
@@ -69,6 +67,16 @@ const userType = [
                       <div className="p-2">
                         Jenis Akun
                         <Select options={ userType } defaultValue={{value: getIsAdmin(),label: userType[getIsAdmin()].label}} placeholder={'Jenis Akun'} name={'is_admin'} />
+                      </div>
+                      <div className="p-2">
+                        Ubah Password
+                        {/* Uraian */}
+                        <InputInForms name="password" type="password" handleChange={(value) => this.onChange(value)}/>
+                      </div>
+                      <div className="p-2">
+                        Ulangi Password
+                        {/* Uraian */}
+                        <InputInForms name="password_confirmation" type="password" handleChange={(value) => this.onChange(value)}/>
                       </div>
                     </div>
                 </div>

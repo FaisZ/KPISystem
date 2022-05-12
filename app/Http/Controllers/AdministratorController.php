@@ -13,6 +13,9 @@ use Auth;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Http\Redirector;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdministratorController extends Controller
 {
@@ -63,7 +66,10 @@ class AdministratorController extends Controller
 
     public function listUsers(){
       $errors = '';
-      try {
+      $users = [];
+      $allUsers = [];
+      $allRank = [];
+    try {
         $users = new User();
         $allUsers = $users->getAllUsers();
         $allRank = Rank::select('name AS label','id AS value')->get();
@@ -79,6 +85,24 @@ class AdministratorController extends Controller
 
     public function updateUser(Request $request){
       $errors = '';
+
+      $nameValidator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+      ]);
+      if ($nameValidator->fails()) {
+        $errors = $nameValidator->errors()->first();
+        return redirect()->back()->with('errors', $errors);
+      }
+      if($request->password != ''){
+        $passwordValidator = Validator::make($request->all(), [
+          'password' => ['confirmed', Rules\Password::defaults()],
+        ]);
+        if ($passwordValidator->fails()) {
+          $errors = $passwordValidator->errors()->first();
+          return redirect()->back()->with('errors', $errors);
+        }
+      }
       try {
         $user = User::find($request->id);
         $user->name = $request->name;
@@ -86,6 +110,7 @@ class AdministratorController extends Controller
         $user->rank_id = $request->rank_id;
         $user->boss_id = $request->boss_id;
         $user->is_admin = $request->is_admin;
+        $user->password = Hash::make($request->password);
         $user->save();
       }
       catch (\Throwable $e){

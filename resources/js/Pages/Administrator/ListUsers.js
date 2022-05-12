@@ -12,7 +12,7 @@ export default function ListUsers(props) {
     <Authenticated
       auth={props.auth}
       errors={props.errors}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Pengguna</h2>}
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Pengguna {props.flash.errors}</h2>}
     >
       <div>
         <Head title="Tambah Master Data Aktivitas" />

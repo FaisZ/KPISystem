@@ -47,8 +47,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // event(new Registered($user));
-
-        return redirect()->back();
+        return redirect()->back()->with('errors','fail');
         // return redirect::back();
     }
 }
