@@ -34,13 +34,15 @@ export default function CustomRegister(props) {
     return (
         <Authenticated
         auth={props.auth}
-        errors={props.errors}
+        // errors={(props.flash.errors==null) ? props.errors : props.flash.errors}
+        errors={(props.flash.success==null) ? props.errors : props.flash.success}
+        // errors={props.errors}
         header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Daftarkan Pengguna Baru</h2>}
       >
-    <Guest>
+        <Guest>
               <Head title="Register" />
 
-            <ValidationErrors errors={errors} />
+            {/* <ValidationErrors errors={errors} /> */}
 
             <form onSubmit={submit}>
                 <div>

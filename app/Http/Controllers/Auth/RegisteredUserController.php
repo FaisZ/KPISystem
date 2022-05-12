@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
 {
@@ -34,12 +35,22 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        //old ways
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // ]);
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required','confirmed', Rules\Password::defaults()],
         ]);
-
+        if ($validator->fails()) {
+            return redirect()->back()->with('success',$validator->errors()->first());
+            // return redirect()->back()->with('errors', $validator->errors()->first());
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -47,7 +58,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // event(new Registered($user));
-        return redirect()->back()->with('errors','fail');
+        return redirect()->back()->with('success','User Creation Success');
         // return redirect::back();
     }
 }

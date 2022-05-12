@@ -14,7 +14,7 @@ export default function ListAktivitasPage(props) {
   return (
     <Authenticated
       auth={props.auth}
-      errors={props.errors}
+      errors={(props.flash.errors==null) ? props.errors : props.flash.errors}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Aktivitas</h2>}
     >
       <div>
