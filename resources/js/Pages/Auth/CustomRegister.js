@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import Button from '@/Components/Button';
-import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import Authenticated from '@/Layouts/Authenticated';
+import RegisteredAdmin from '@/Layouts/RegisteredAdmin';
 
 export default function CustomRegister(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -39,7 +39,7 @@ export default function CustomRegister(props) {
         // errors={props.errors}
         header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Daftarkan Pengguna Baru</h2>}
       >
-        <Guest>
+        <RegisteredAdmin>
               <Head title="Register" />
 
             {/* <ValidationErrors errors={errors} /> */}
@@ -108,7 +108,7 @@ export default function CustomRegister(props) {
                     </Button>
                 </div>
             </form>
-        </Guest>
+        </RegisteredAdmin>
         </Authenticated>
     );
 }

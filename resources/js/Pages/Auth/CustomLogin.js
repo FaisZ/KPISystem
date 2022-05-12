@@ -75,14 +75,14 @@ export default function CustomLogin({ status, canResetPassword }) {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
+                    {/* {canResetPassword && (
                         <Link
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900"
                         >
                             Lupa password
                         </Link>
-                    )}
+                    )} */}
 
                     <Button className="ml-4" processing={processing}>
                         Log in
