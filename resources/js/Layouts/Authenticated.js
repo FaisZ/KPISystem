@@ -10,7 +10,7 @@ import { Box } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Fade } from "@material-ui/core";
 import { Backdrop } from "@material-ui/core";
-
+import Footer from '@/Components/Footer';
 
 export default function Authenticated({ auth, header, children, errors }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -271,8 +271,8 @@ export default function Authenticated({ auth, header, children, errors }) {
                 <div className="max-w-8xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}
-
             <main>{children}</main>
+            <Footer />
         </div>
     );
 }

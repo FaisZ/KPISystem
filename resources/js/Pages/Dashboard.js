@@ -17,8 +17,11 @@ export default function Dashboard(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                     <PegawaiDashboard auth={props.auth} />
+                    <PegawaiDashboard auth={props.auth} />
+                    <PegawaiDashboard auth={props.auth} />
+                    <PegawaiDashboard auth={props.auth} />
+                    <PegawaiDashboard auth={props.auth} />
                     
-                    <AdminDashboard auth={props.auth} />
                 </div>
             </div>
 
