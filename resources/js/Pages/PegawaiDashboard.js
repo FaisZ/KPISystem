@@ -52,7 +52,7 @@ export default function PegawaiDashboard(props) {
 
                 <div className="ml-12">
                     <div className="mt-2 text-gray-600 dark:text-gray-400 text-black">
-                        30 Aktivitas
+                    {props.auth.user.activity_count} Aktivitas
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@ export default function PegawaiDashboard(props) {
 
                 <div className="ml-12">
                     <div className="mt-2 text-gray-600 dark:text-gray-400 text-black">
-                        30 Aktivitas
+                    {props.auth.user.approved_activity_count} Aktivitas
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@ export default function PegawaiDashboard(props) {
 
                 <div className="ml-12">
                     <div className="mt-2 text-gray-600 dark:text-gray-400 text-black">
-                        30 Aktivitas
+                    {props.auth.user.rejected_activity_count} Aktivitas
                     </div>
                 </div>
             </div>
