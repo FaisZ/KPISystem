@@ -48,7 +48,10 @@ class User extends Authenticatable
 
     protected $appends = [
         'has_underling',
-        'total_score'
+        'total_score',
+        'activity_count',
+        'approved_activity_count',
+        'rejected_activity_count'
     ];
     public function getHasUnderlingAttribute()
     {
@@ -60,6 +63,21 @@ class User extends Authenticatable
     public function getTotalScoreAttribute()
     {
         return $this->getSelectedUserKPIScore(Auth::id());
+    }
+
+    public function getActivityCountAttribute()
+    {
+        return $this->getSelectedUserActivityCount(Auth::id());
+    }
+
+    public function getApprovedActivityCountAttribute()
+    {
+        return $this->getSelectedUserApprovedActivityCount(Auth::id(),1);
+    }
+
+    public function getRejectedActivityCountAttribute()
+    {
+        return $this->getSelectedUserApprovedActivityCount(Auth::id(),2);
     }
 
     public function getAllUsers()
@@ -277,6 +295,33 @@ class User extends Authenticatable
         ->orderBy('kpi_submission.updated_at','desc')
         ->sum('kpi_activity.credit_value');
     }
+    
+    public function getSelectedUserActivityCount($user_id){
+        $res = DB::table('kpi_submission')
+        ->select(
+            'kpi_activity.id AS aktivitas_id','kpi_activity.title AS aktivitas','kpi_activity.credit_value as angkaKredit',
+            )
+        ->leftJoin('kpi_activity','kpi_activity.id','=','kpi_submission.kpi_activity_id')
+        ->where('kpi_submission.user_id','=', $user_id)
+        // ->where('kpi_submission.status','=', 1)
+        ->orderBy('kpi_submission.updated_at','desc')
+        ->get();
+        return count($res);
+    }
+    
+    public function getSelectedUserApprovedActivityCount($user_id,$status){
+        $res = DB::table('kpi_submission')
+        ->select(
+            'kpi_activity.id AS aktivitas_id','kpi_activity.title AS aktivitas','kpi_activity.credit_value as angkaKredit',
+            )
+        ->leftJoin('kpi_activity','kpi_activity.id','=','kpi_submission.kpi_activity_id')
+        ->where('kpi_submission.user_id','=', $user_id)
+        ->where('kpi_submission.status','=', $status)
+        ->orderBy('kpi_submission.updated_at','desc')
+        ->get();
+        return count($res);
+    }
+    
     public function getBoss($user_id){
         $boss_id = User::select('boss_id')->where('id','=',$user_id)->first();
         if($boss_id == null)
