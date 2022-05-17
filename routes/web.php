@@ -57,6 +57,7 @@ Route::get('/administrator/aktivitas', [AdministratorController::class, 'listAkt
 // Route::get('/administrator/add_aktivitas', [AdministratorController::class, 'newAktivitas'])->middleware(['auth', 'admin'])->name('add_aktivitas');
 Route::post('/administrator/add_aktivitas', [AdministratorController::class, 'addAktivitas'])->middleware(['auth', 'admin'])->name('add_aktivitas');
 Route::post('/administrator/update_aktivitas', [AdministratorController::class, 'updateAktivitas'])->middleware(['auth', 'admin'])->name('update_aktivitas');
+Route::post('/administrator/delete_aktivitas', [AdministratorController::class, 'deleteAktivitas'])->middleware(['auth', 'admin'])->name('delete_aktivitas');
 
 Route::get('/administrator/pengguna', [AdministratorController::class, 'listUsers'])->middleware(['auth', 'admin'])->name('master_users');
 Route::post('/administrator/update_user', [AdministratorController::class, 'updateUser'])->middleware(['auth', 'admin']);

@@ -15,6 +15,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel'
 import TableToolbar from './TableToolbar'
 import ReactModal from '../ReactModal'
 import EditActivityForm from '../Forms/EditActivityForm'
+import Button from '../Button'
 import {
   useGlobalFilter,
   usePagination,
@@ -183,7 +184,8 @@ const ActivitySpecificEnhancedTable = ({
   const removeByIndexs = (array, indexs) =>
     array.filter((_, i) => !indexs.includes(i))
 
-  // Render the UI for your table
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    // Render the UI for your table
   return (
     <TableContainer>
       <TableToolbar
@@ -246,10 +248,17 @@ const ActivitySpecificEnhancedTable = ({
                   />
                 </TableCell>
                 <TableCell> 
-                  <ReactModal 
+                  <form method="POST" action="/administrator/delete_aktivitas">
+                    <input type="hidden" name="_token" value={token} />
+                    <input hidden="true" name="id" value={data[row.index].id}/>
+                    <div className="p-2">
+                      <Button children='Hapus' />
+                    </div>
+                  </form>
+                  {/* <ReactModal 
                     modalOpenText={'Hapus'} 
                     modalTitle={'Hapus Aktivitas'}
-                  /> 
+                  />  */}
                 </TableCell>
                 </TableRow>
                 {row.isExpanded ? (

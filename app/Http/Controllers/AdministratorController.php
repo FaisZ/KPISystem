@@ -9,6 +9,7 @@ use App\Models\Rank;
 use App\Models\Aktivitas;
 use App\Models\Tahapan;
 use App\Models\BuktiFisik;
+use App\Models\KPISubmission;
 use Auth; 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -124,6 +125,11 @@ class AdministratorController extends Controller
 
     private function _newAktivitasDefaultData($errors){
       $errors = '';
+      $allUnsur = [];
+      $allRank = [];
+      $aktivitas = [];
+      $allAktivitas = [];
+      $buktiFisik = [];
       try {
         $allUnsur = Unsur::select('title AS label','id AS value','parent_id','level')->get();
         $allRank = Rank::select('name AS label','id AS value')->get();
@@ -240,6 +246,31 @@ class AdministratorController extends Controller
         $errors = 'Updating bukti failed with error: '.$e;
       }
 
+      return redirect()->back()->with('errors', $errors);
+    }
+
+    public function deleteAktivitas(Request $request)
+    {
+      $errors = '';
+      try {
+        error_log($request->id);
+        $existingActivity = KPISubmission::where('kpi_activity_id',$request->id)->get();
+        if(count($existingActivity)>0){
+          $errors = 'Aktivitas digunakan';
+        }
+        else{
+          BuktiFisik::where('kpi_activity_id',$request->id)->delete();
+          Tahapan::where('kpi_activity_id',$request->id)->delete();
+          Aktivitas::destroy($request->id);
+        }
+      }
+      catch (\Throwable $e){
+        $errors = 'Delete aktivitas failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Delete aktivitas failed with error: '.$e->getMessage();
+      }
+      error_log($errors);
       return redirect()->back()->with('errors', $errors);
     }
 
