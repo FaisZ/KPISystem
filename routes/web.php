@@ -61,6 +61,7 @@ Route::post('/administrator/delete_aktivitas', [AdministratorController::class, 
 
 Route::get('/administrator/pengguna', [AdministratorController::class, 'listUsers'])->middleware(['auth', 'admin'])->name('master_users');
 Route::post('/administrator/update_user', [AdministratorController::class, 'updateUser'])->middleware(['auth', 'admin']);
+Route::post('/administrator/delete_user', [AdministratorController::class, 'deleteUser'])->middleware(['auth', 'admin']);
 
 Route::get('/e', function () {
   return Inertia::render('Experiments', ['hello' => 'world']);

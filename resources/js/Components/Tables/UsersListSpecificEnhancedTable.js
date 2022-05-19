@@ -147,6 +147,7 @@ const UsersListSpecificEnhancedTable = ({
     setData(newData)
   }
 
+  const token = document.head.querySelector('meta[name="csrf-token"]').content;
   // Render the UI for your table
   return (
     <TableContainer>
@@ -194,7 +195,15 @@ const UsersListSpecificEnhancedTable = ({
                   )
                 })}
                 <TableCell> <ReactModal modalContent={<EditUserForm allRank={rankData} selectedData={data[row.index]} allUsers={data}/>} modalWidth={'50%'} modalOpenText={'Edit'} modalTitle={'Edit Pengguna'}/> </TableCell>
-                <TableCell> <ReactModal modalOpenText={'Hapus'} modalTitle={'Hapus Pengguna'}/> </TableCell>
+                <TableCell> 
+                  <form method="POST" action="/administrator/delete_user">
+                    <input type="hidden" name="_token" value={token} />
+                    <input hidden="true" name="id" value={data[row.index].id}/>
+                    <div className="p-2">
+                      <Button children='Hapus' />
+                    </div>
+                  </form>
+                </TableCell>
               </TableRow>
             )
           })}

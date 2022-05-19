@@ -123,6 +123,29 @@ class AdministratorController extends Controller
       return redirect()->back()->with('errors', $errors);
     }
 
+    public function deleteUser(Request $request)
+    {
+      $errors = '';
+      try {
+        error_log($request->id);
+        $existingActivity = KPISubmission::where('user_id',$request->id)->get();
+        if(count($existingActivity)>0){
+          $errors = 'Pengguna memiliki aktivitas. Tidak dapat dihapus.';
+        }
+        else{
+          User::destroy($request->id);
+        }
+      }
+      catch (\Throwable $e){
+        $errors = 'Delete user failed with error: '.$e->getMessage();
+      }
+      catch (\Exception $e){
+        $errors = 'Delete user failed with error: '.$e->getMessage();
+      }
+      error_log($errors);
+      return redirect()->back()->with('errors', $errors);
+    }
+
     private function _newAktivitasDefaultData($errors){
       $errors = '';
       $allUnsur = [];
