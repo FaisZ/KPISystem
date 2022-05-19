@@ -10,12 +10,12 @@ const UsersTable = ({
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Nama',
-        accessor: 'nama',
+        Header: 'Nip',
+        accessor: 'nip',
       },
       {
-        Header: 'Email',
-        accessor: 'email',
+        Header: 'Nama',
+        accessor: 'nama',
       },
       {
         Header: 'Jabatan',

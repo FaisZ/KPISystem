@@ -42,18 +42,24 @@ class RegisteredUserController extends Controller
         //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
         // ]);
 
+        $errors = '';
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            // 'email' => 'required|string|email|max:255|unique:users',
+            'nip' => 'required|numeric|digits:3,30|unique:users',
             'password' => ['required','confirmed', Rules\Password::defaults()],
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('success',$validator->errors()->first());
+            // $errors = $validator->errors()->first();
+            return redirect()->back()->with('errors', $errors);
+              return redirect()->back()->with('success',$validator->errors()->first());
+              //for some reason 'errors' fail
             // return redirect()->back()->with('errors', $validator->errors()->first());
         }
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            // 'email' => $request->email,
+            'nip' => $request->nip,
             'password' => Hash::make($request->password),
         ]);
 

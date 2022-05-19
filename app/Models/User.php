@@ -23,7 +23,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        // 'email',
+        'nip',
         'password',
     ];
 
@@ -84,7 +85,7 @@ class User extends Authenticatable
     {
         return DB::table('users')
         ->select(
-            'users.id','users.name AS nama','users.email','boss.id AS atasan_id','boss.name AS atasan','rank.name AS jabatan', 'rank.id AS jabatan_id',
+            'users.id','users.name AS nama','users.nip','boss.id AS atasan_id','boss.name AS atasan','rank.name AS jabatan', 'rank.id AS jabatan_id',
             'users.is_admin',
             DB::raw('
             CASE 

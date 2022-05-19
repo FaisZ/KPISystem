@@ -89,7 +89,7 @@ class AdministratorController extends Controller
 
       $nameValidator = Validator::make($request->all(), [
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255',
+        'nip' => 'required|numeric|digits:3,30|unique:users',
       ]);
       if ($nameValidator->fails()) {
         $errors = $nameValidator->errors()->first();
@@ -107,7 +107,8 @@ class AdministratorController extends Controller
       try {
         $user = User::find($request->id);
         $user->name = $request->name;
-        $user->email = $request->email;
+        // $user->email = $request->email;
+        $user->nip = $request->nip;
         $user->rank_id = $request->rank_id;
         $user->boss_id = $request->boss_id;
         $user->is_admin = $request->is_admin;

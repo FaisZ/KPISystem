@@ -61,6 +61,20 @@ export default function CustomRegister(props) {
                 </div>
 
                 <div className="mt-4">
+                    <Label forInput="nip" value="Nip" />
+
+                    <Input
+                        type="number"
+                        name="nip"
+                        value={data.nip}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        handleChange={onHandleChange}
+                        required
+                    />
+                </div>
+{/* 
+                <div className="mt-4">
                     <Label forInput="email" value="Email" />
 
                     <Input
@@ -73,7 +87,7 @@ export default function CustomRegister(props) {
                         required
                     />
                 </div>
-
+ */}
                 <div className="mt-4">
                     <Label forInput="password" value="Password" />
 

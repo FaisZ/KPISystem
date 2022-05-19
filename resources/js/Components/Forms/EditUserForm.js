@@ -53,9 +53,13 @@ const userType = [
                         <InputInForms name="name" defaultValue={selectedData.nama} handleChange={(value) => this.onChange(value)}/>
                       </div>
                       <div className="p-2">
+                        NIP
+                        <InputInForms name="nip" type="number" defaultValue={selectedData.nip} handleChange={(value) => this.onChange(value)}/>
+                      </div>
+                      {/* <div className="p-2">
                         Email
                         <InputInForms name="email" type="email" defaultValue={selectedData.email} handleChange={(value) => this.onChange(value)}/>
-                      </div>
+                      </div> */}
                       <div className="p-2">
                         Jabatan
                         <Select options={ allRank } defaultValue={{value: selectedData.jabatan_id,label: selectedData.jabatan}}  placeholder={'Pilih Jabatan'} name={'rank_id'} />
