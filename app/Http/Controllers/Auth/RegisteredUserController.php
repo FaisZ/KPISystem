@@ -46,12 +46,13 @@ class RegisteredUserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             // 'email' => 'required|string|email|max:255|unique:users',
-            'nip' => 'required|numeric|digits:3,30|unique:users',
+            // 'nip' => 'required|numeric|digits:3-30|unique:users',
+            'nip' => 'required|numeric|unique:users',
             'password' => ['required','confirmed', Rules\Password::defaults()],
         ]);
         if ($validator->fails()) {
             // $errors = $validator->errors()->first();
-            return redirect()->back()->with('errors', $errors);
+            // return redirect()->back()->with('errors', $errors);
               return redirect()->back()->with('success',$validator->errors()->first());
               //for some reason 'errors' fail
             // return redirect()->back()->with('errors', $validator->errors()->first());

@@ -89,7 +89,8 @@ class AdministratorController extends Controller
 
       $nameValidator = Validator::make($request->all(), [
         'name' => 'required|string|max:255',
-        'nip' => 'required|numeric|digits:3,30|unique:users',
+        // 'nip' => 'required|numeric|digits:3,30|unique:users',
+        'nip' => 'numeric',
       ]);
       if ($nameValidator->fails()) {
         $errors = $nameValidator->errors()->first();
