@@ -1,0 +1,17 @@
+1. install xampp-windows-x64-8.1.4-0-VS16-installer
+2. install node-v17.8.0-x64
+3. clone branch main from KPISystem
+4. open cmd, navigate to KPISystem folder
+5. run this command: 
+	npm install
+6. wait until it's successful
+7. run this command: 
+	npm run watch
+8. open another cmd, navigate to KPISystem folder
+9. run this command:
+	php artisan migrate
+	php artisan serve --host 0.0.0.0
+10.open another cmd, run this command:
+	ipconfig
+11.find the computer's ip address
+12.open the app in <computer's ip address>:8000
