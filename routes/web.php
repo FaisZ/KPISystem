@@ -42,7 +42,7 @@ Route::get('/welcome', function () {
     ]);
 });
 
-Route::get('/register', [RegisteredUserController::class, 'create'])->middleware(['auth', 'verified'])->name('register');
+Route::get('/register', [RegisteredUserController::class, 'create']);//->middleware(['auth', 'verified'])->name('register');
 Route::post('register', [RegisteredUserController::class, 'store']);
 
 

@@ -6,6 +6,7 @@ import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import Authenticated from '@/Layouts/Authenticated';
 import RegisteredAdmin from '@/Layouts/RegisteredAdmin';
+import Guest from '@/Layouts/Guest';
 
 export default function CustomRegister(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -32,14 +33,7 @@ export default function CustomRegister(props) {
     };
 
     return (
-        <Authenticated
-        auth={props.auth}
-        // errors={(props.flash.errors==null) ? props.errors : props.flash.errors}
-        errors={(props.flash.success==null) ? props.errors : props.flash.success}
-        // errors={props.errors}
-        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Daftarkan Pengguna Baru</h2>}
-      >
-        <RegisteredAdmin>
+        <Guest>
               <Head title="Register" />
 
             {/* <ValidationErrors errors={errors} /> */}
@@ -122,7 +116,6 @@ export default function CustomRegister(props) {
                     </Button>
                 </div>
             </form>
-        </RegisteredAdmin>
-        </Authenticated>
+        </Guest>
     );
 }
