@@ -40,12 +40,12 @@ export default function CustomLogin({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="Email" />
+                    <Label forInput="nip" value="NIP" />
 
                     <Input
                         type="text"
-                        name="email"
-                        value={data.email}
+                        name="nip"
+                        value={data.nip}
                         className="mt-1 block w-full"
                         autoComplete="username"
                         isFocused={true}
