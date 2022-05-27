@@ -69,8 +69,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    // 'timezone' => 'UTC',
+    // 'timezone' => date_default_timezone_get(),
+    'timezone' => 'Asia/Jakarta',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
