@@ -111,7 +111,7 @@ export default function Authenticated({ auth, header, children, errors }) {
 
                                             <Dropdown.Content>
                                                 <Dropdown.Link href={route('atasan')} method="get" as="button">
-                                                    Aktivitas Bawahan
+                                                    Aktivitas JFPP
                                                 </Dropdown.Link>
                                             </Dropdown.Content>
                                         </Dropdown>
