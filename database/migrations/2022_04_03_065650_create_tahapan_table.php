@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tahapan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kpi_activity_id');
-            $table->string('description');
+            $table->string('description', 1000);
             $table->timestamps();
         });
     }
