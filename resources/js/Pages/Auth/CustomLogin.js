@@ -43,7 +43,7 @@ export default function CustomLogin({ status, canResetPassword }) {
                     <Label forInput="nip" value="NIP" />
 
                     <Input
-                        type="text"
+                        type="number"
                         name="nip"
                         value={data.nip}
                         className="mt-1 block w-full"
